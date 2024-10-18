@@ -33,7 +33,7 @@ const LayoutIndex: React.FC = () => {
                             <div style={{
                                 background: colorBgContainer,
                                 padding: 24,
-                                minHeight: 600,
+                                minHeight: 750,
                                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
                             }}>
                                 {/*路由出口*/}

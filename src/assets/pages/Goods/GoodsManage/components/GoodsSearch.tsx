@@ -1,13 +1,13 @@
 import React from "react";
 import {Button, Form, Input, Select} from "antd";
 
-const siteAddress = [
-    {value: '1', label: '南泰中央华府'},
-    {value: '2', label: '安达小区'},
+const category = [
+    {value: '1', label: '团购'},
+    {value: '2', label: '精选'},
+    {value: '3', label: '服务'},
 ];
 
-
-const PreferredSearch: React.FC = () => {
+const GoodsSearch: React.FC = () => {
     return (
         <>
             <Form
@@ -19,9 +19,9 @@ const PreferredSearch: React.FC = () => {
                 <Form.Item label="商品名" style={{width: 240}}>
                     <Input placeholder={'请输入商品名'}/>
                 </Form.Item>
-                <Form.Item label="站点" style={{width: 220}}>
-                    <Select placeholder="请选站点">
-                        {siteAddress.map((item) => (
+                <Form.Item label="分类" style={{width: 220}}>
+                    <Select placeholder="选择分类">
+                        {category.map((item) => (
                             <Select.Option key={item.value} value={item.value}>
                                 {item.label}
                             </Select.Option>
@@ -38,4 +38,4 @@ const PreferredSearch: React.FC = () => {
         </>
     )
 }
-export default PreferredSearch
+export default GoodsSearch

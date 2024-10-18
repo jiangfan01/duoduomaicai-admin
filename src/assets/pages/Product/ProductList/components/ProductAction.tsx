@@ -13,7 +13,6 @@ interface DataType {
     price: number;
     address: string;
     image: string;
-    status: string;
     receiver: string;
     phone: number
 }

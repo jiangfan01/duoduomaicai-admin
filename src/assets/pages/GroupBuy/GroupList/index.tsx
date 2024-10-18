@@ -5,17 +5,13 @@ import {
     Image,
     Tooltip,
     message,
-    Button,
     Modal,
     Space,
     Popconfirm,
     PopconfirmProps,
-    Tag
 } from 'antd';
 import type {TableColumnsType} from 'antd';
 import "../../../style/table.scss";
-import ProductSearch from "../../Product/ProductList/components/ProductSearch.tsx";
-import ProductAction from "../../Product/ProductList/components/ProductAction.tsx";
 import GroupSearch from "./components/GroupSearch.tsx";
 import GroupAction from "./components/GroupAction.tsx";
 
@@ -27,9 +23,8 @@ interface DataType {
     address: string;
     image: string;
     siteAddress: string;
-    status: string;
     receiver: string;
-    phone: number
+    phone: number;
 }
 
 
@@ -67,20 +62,6 @@ const GroupList: React.FC = () => {
         });
     };
 
-    const statusColor = (status: string) => {
-        switch (status) {
-            case '已发货':
-                return 'green';
-            case '配送中':
-                return 'green';
-            case '已收货':
-                return 'green';
-            case '已取消':
-                return 'red';
-            default:
-                return 'error';
-        }
-    };
 
     const columns: TableColumnsType<DataType> = [
         {
@@ -156,15 +137,6 @@ const GroupList: React.FC = () => {
             )
         },
         {
-            title: "状态",
-            dataIndex: 'status',
-            width: 100,
-            align: "center",
-            render: (text: string) => (
-                <Tag color={statusColor(text) || "error"}>{text}</Tag>
-            )
-        },
-        {
             title: "所属站点",
             dataIndex: 'siteAddress',
             width: 100,
@@ -190,7 +162,7 @@ const GroupList: React.FC = () => {
             align: "center",
             render: (_, record) => (
                 <Space size="middle">
-                    <a onClick={() => showModal('edit', record)}>修改</a>
+                    {/*<a onClick={() => showModal('edit', record)}>修改</a>*/}
                     <a onClick={() => showModal('check', record)}>查看</a>
                     <Popconfirm
                         title="确认删除？"
@@ -215,9 +187,8 @@ const GroupList: React.FC = () => {
             address: '湖北咸宁',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
-            status: "已发货",
             receiver: "王五",
-            phone: "12345678901",
+            phone: 1234567890,
         },
         {
             key: '2',
@@ -227,9 +198,8 @@ const GroupList: React.FC = () => {
             address: '湖北武汉',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
-            status: "配送中",
             receiver: "张三",
-            phone: "12345678902",
+            phone: 123456787,
         },
         {
             key: '3',
@@ -239,9 +209,8 @@ const GroupList: React.FC = () => {
             address: '湖北武汉天河机场',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
-            status: "已收货",
             receiver: "李四",
-            phone: "12345678903",
+            phone: 12345678,
         },
     ];
 
@@ -256,13 +225,13 @@ const GroupList: React.FC = () => {
         >
             <div className="top-search">
                 <GroupSearch/>
-                <Button
-                    onClick={() => showModal('add')}
-                    type="primary"
-                    style={{marginBottom: '20px'}}
-                >
-                    新增
-                </Button>
+                {/*<Button*/}
+                {/*    onClick={() => showModal('add')}*/}
+                {/*    type="primary"*/}
+                {/*    style={{marginBottom: '20px'}}*/}
+                {/*>*/}
+                {/*    新增*/}
+                {/*</Button>*/}
             </div>
             <Table<DataType>
                 style={{marginTop: 20}}

@@ -5,6 +5,8 @@ import GroupList from "../pages/GroupBuy/GroupList";
 import Preferred from "../pages/GroupBuy/Preferred";
 import GroupManage from "../pages/GroupBuy/GroupManage";
 import ProductList from "../pages/Product/ProductList";
+import ProductManage from "../pages/Product/ProductManage";
+import GoodsManage from "../pages/Goods/GoodsManage";
 
 
 const routes = createBrowserRouter([
@@ -17,6 +19,15 @@ const routes = createBrowserRouter([
 
                 path: '/home',
                 element: <Home/>
+            },
+            {
+                path: '/goods',
+                children: [
+                    {
+                        path: '/goods/manage',
+                        element: <GoodsManage/>
+                    }
+                ]
             },
             {
                 path: '/groupbuy',
@@ -36,11 +47,15 @@ const routes = createBrowserRouter([
                 ]
             },
             {
-                path:'/product',
+                path: '/product',
                 children: [
                     {
                         path: '/product/list',
                         element: <ProductList/>
+                    },
+                    {
+                        path: '/product/manage',
+                        element: <ProductManage/>
                     }
                 ]
             },

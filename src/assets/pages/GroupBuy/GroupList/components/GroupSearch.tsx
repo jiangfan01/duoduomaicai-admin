@@ -6,13 +6,6 @@ const siteAddress = [
     {value: '2', label: '安达小区'},
 ];
 
-const GroupCategory = [
-    {value: '1', label: '手机'},
-    {value: '2', label: '水果'},
-    {value: '3', label: '生鲜'},
-    {value: '4', label: '小家电'},
-    {value: '5', label: '其他'},
-]
 const GroupSearch: React.FC = () => {
     return (
         <>
@@ -28,15 +21,6 @@ const GroupSearch: React.FC = () => {
                 <Form.Item label="站点" style={{width: 220}}>
                     <Select placeholder="请选站点">
                         {siteAddress.map((item) => (
-                            <Select.Option key={item.value} value={item.value}>
-                                {item.label}
-                            </Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="分类" style={{width: 220}}>
-                    <Select placeholder="请选择分类">
-                        {GroupCategory.map((item) => (
                             <Select.Option key={item.value} value={item.value}>
                                 {item.label}
                             </Select.Option>

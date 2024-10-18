@@ -19,7 +19,7 @@ interface DataType {
     phone: number
 }
 
-interface EditFormProps {
+interface GoodsActionProps {
     action: 'add' | 'edit' | 'check';
     record: DataType | null;
     onSubmit: () => void;
@@ -29,7 +29,7 @@ const siteAddress = [
     {value: '1', label: '南泰中央华府'},
     {value: '2', label: '安达小区'},
 ];
-const GroupAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
+const GroupAction: React.FC<GoodsActionProps> = ({action, record, onSubmit}) => {
     const handleFormSubmit = () => {
         onSubmit();
     };

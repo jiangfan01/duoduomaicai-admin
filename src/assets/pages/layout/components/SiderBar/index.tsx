@@ -8,7 +8,8 @@ import {
     CarryOutOutlined,
     AliwangwangOutlined,
     TeamOutlined,
-    DropboxOutlined
+    DropboxOutlined,
+    MoneyCollectOutlined
 } from "@ant-design/icons";
 import {To, useNavigate} from "react-router-dom";
 
@@ -38,14 +39,17 @@ const SiderBar: React.FC = () => {
     };
     const items: MenuItem[] = [
         getItem('首页', '/home', <PieChartOutlined/>),
+        getItem('商品', '/goods', <MoneyCollectOutlined/>, [
+            getItem("商品管理", '/goods/manage'),
+            getItem('上架商品', '/goods/add'),
+        ]),
         getItem('团购', '/groupbuy', <AccountBookOutlined/>, [
-            getItem("团购管理", '/groupbuy/manage'),
-            getItem('团购列表', '/groupbuy/list'),
+            getItem('团购订单', '/groupbuy/list'),
             getItem("今日优选", '/groupbuy/preferred')
         ]),
         getItem('精选', '/product', <CarryOutOutlined/>, [
             getItem('精选列表', '/product/list'),
-            getItem("精选管理", '25'),
+            getItem("精选管理", '/product/manage'),
         ]),
         getItem('服务', '/222', <DashboardOutlined/>, [
             getItem('服务列表', '26'),

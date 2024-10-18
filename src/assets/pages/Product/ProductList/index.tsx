@@ -10,7 +10,6 @@ import {
     Space,
     Popconfirm,
     PopconfirmProps,
-    Tag
 } from 'antd';
 import type {TableColumnsType} from 'antd';
 import "../../../style/table.scss";
@@ -25,7 +24,6 @@ interface DataType {
     address: string;
     image: string;
     createTime: string;
-    status: string;
     receiver: string;
     phone: number
 }
@@ -65,20 +63,6 @@ const Product: React.FC = () => {
         });
     };
 
-    const statusColor = (status: string) => {
-        switch (status) {
-            case '已发货':
-                return 'green';
-            case '配送中':
-                return 'green';
-            case '已收货':
-                return 'green';
-            case '已取消':
-                return 'red';
-            default:
-                return 'error';
-        }
-    };
 
 
     const columns: TableColumnsType<DataType> = [
@@ -155,15 +139,6 @@ const Product: React.FC = () => {
             )
         },
         {
-            title: "状态",
-            dataIndex: 'status',
-            width: 100,
-            align: "center",
-            render: (text: string) => (
-                <Tag color={statusColor(text) || "error"}>{text}</Tag>
-            )
-        },
-        {
             title: "下单时间",
             dataIndex: 'createTime',
             width: 100,
@@ -200,11 +175,9 @@ const Product: React.FC = () => {
             price: 15000,
             address: '湖北咸宁',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-            siteAddress: "南泰中央华府",
-            status: "已发货",
             createTime: "2023-07-01",
             receiver: "王五",
-            phone: "12345678901",
+            phone: 1234567,
         },
         {
             key: '2',
@@ -213,11 +186,9 @@ const Product: React.FC = () => {
             price: 6199,
             address: '湖北武汉',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-            siteAddress: "南泰中央华府",
-            status: "配送中",
             createTime: "2023-07-01",
             receiver: "张三",
-            phone: "12345678902",
+            phone: 12319565,
         },
         {
             key: '3',
@@ -226,11 +197,9 @@ const Product: React.FC = () => {
             price: 8999,
             address: '湖北武汉天河机场',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-            siteAddress: "南泰中央华府",
-            status: "已收货",
             createTime: "2023-07-01",
             receiver: "李四",
-            phone: "12345678903",
+            phone: 123548976,
         },
     ];
 
