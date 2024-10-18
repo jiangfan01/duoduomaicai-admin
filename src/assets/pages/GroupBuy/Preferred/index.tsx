@@ -27,6 +27,8 @@ interface DataType {
     siteAddress: string;
     createTime: string;
     status: string;
+    receiver: string;
+    phone: number
 }
 
 
@@ -118,6 +120,23 @@ const Preferred: React.FC = () => {
             align: "center"
         },
         {
+            title: "收货人",
+            dataIndex: 'receiver',
+            width: 100,
+            align: "center",
+        },
+        {
+            title: "收货人电话",
+            dataIndex: 'phone',
+            width: 100,
+            align: "center",
+            render: (text: number) => (
+                <Tooltip title="点击复制">
+                    <a onClick={() => handleCopy(text.toString())}>{text}</a>
+                </Tooltip>
+            )
+        },
+        {
             title: "下单地址",
             dataIndex: 'address',
             width: 200,
@@ -196,39 +215,41 @@ const Preferred: React.FC = () => {
     const data: DataType[] = [
         {
             key: '1',
-            id: 123,
-            name: '苹果',
-            price: 9.9,
+            id: 1,
+            name: 'iPhone16',
+            price: 15000,
             address: '湖北咸宁',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
-            createTime: "2023-07-01",
-            status: "配送中"
+            status: "已发货",
+            receiver: "王五",
+            phone: "12345678901",
         },
         {
             key: '2',
-            id: 124,
-            name: '香蕉',
-            price: 8.8,
+            id: 2,
+            name: 'mate 60 Pro',
+            price: 6199,
             address: '湖北武汉',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
-            createTime: "2023-07-02",
-            status: "已发货"
+            status: "配送中",
+            receiver: "张三",
+            phone: "12345678902",
         },
         {
             key: '3',
-            id: 125,
-            name: '梨子',
-            price: 11.1,
+            id: 3,
+            name: 'iPad Pro',
+            price: 8999,
             address: '湖北武汉天河机场',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
-            createTime: "2023-07-03",
-            status: "已收货"
+            status: "已收货",
+            receiver: "李四",
+            phone: "12345678903",
         },
     ];
-
 
     return (
         <ConfigProvider

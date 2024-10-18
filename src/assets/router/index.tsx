@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home.tsx";
 import GroupList from "../pages/GroupBuy/GroupList";
 import Preferred from "../pages/GroupBuy/Preferred";
 import GroupManage from "../pages/GroupBuy/GroupManage";
+import ProductList from "../pages/Product/ProductList";
 
 
 const routes = createBrowserRouter([
@@ -31,6 +32,15 @@ const routes = createBrowserRouter([
                     {
                         path: '/groupbuy/manage',
                         element: <GroupManage/>
+                    }
+                ]
+            },
+            {
+                path:'/product',
+                children: [
+                    {
+                        path: '/product/list',
+                        element: <ProductList/>
                     }
                 ]
             },

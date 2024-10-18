@@ -1,6 +1,5 @@
-import React from 'react';
+import React from "react";
 import {Button, Form, Input, Select} from "antd";
-
 
 const siteAddress = [
     {value: '1', label: '南泰中央华府'},

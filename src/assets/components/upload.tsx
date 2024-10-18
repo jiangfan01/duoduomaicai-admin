@@ -34,7 +34,6 @@ interface UploadImgProps {
 const UploadImg: React.FC<UploadImgProps> = ({action, initialImageUrl}) => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
-    // 当 `initialImageUrl` 存在时，将其设置为当前显示的图片
     useEffect(() => {
         if (initialImageUrl && action !== 'add') {
             setImageUrl(initialImageUrl);

@@ -43,8 +43,8 @@ const SiderBar: React.FC = () => {
             getItem('团购列表', '/groupbuy/list'),
             getItem("今日优选", '/groupbuy/preferred')
         ]),
-        getItem('精选', '/123', <CarryOutOutlined/>, [
-            getItem('精选列表', '24'),
+        getItem('精选', '/product', <CarryOutOutlined/>, [
+            getItem('精选列表', '/product/list'),
             getItem("精选管理", '25'),
         ]),
         getItem('服务', '/222', <DashboardOutlined/>, [

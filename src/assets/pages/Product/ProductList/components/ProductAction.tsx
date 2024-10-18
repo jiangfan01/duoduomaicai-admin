@@ -3,7 +3,6 @@ import {
     Button,
     Form,
     Input, InputNumber,
-    Select,
 } from 'antd';
 import UploadImg from "../../../../components/upload.tsx";
 
@@ -14,22 +13,19 @@ interface DataType {
     price: number;
     address: string;
     image: string;
-    siteAddress: string;
+    status: string;
     receiver: string;
     phone: number
 }
 
-interface EditFormProps {
+
+interface ProductActionProps {
     action: 'add' | 'edit' | 'check';
     record: DataType | null;
     onSubmit: () => void;
 }
 
-const siteAddress = [
-    {value: '1', label: '南泰中央华府'},
-    {value: '2', label: '安达小区'},
-];
-const GroupAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
+const ProductAction: React.FC<ProductActionProps> = ({action, record, onSubmit,}) => {
     const handleFormSubmit = () => {
         onSubmit();
     };
@@ -41,7 +37,7 @@ const GroupAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
                 id: record.id,
                 name: record.name,
                 price: record.price,
-                siteAddress: record.siteAddress,
+                address: record.address,
                 receiver: record.receiver,
                 phone: record.phone
             });
@@ -72,20 +68,14 @@ const GroupAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
                 <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
-            <Form.Item label="站点" name="siteAddress">
-                <Select placeholder="请选择站点" disabled={isCheckMode}>
-                    {siteAddress.map((item) => (
-                        <Select.Option key={item.value} value={item.value}>
-                            {item.label}
-                        </Select.Option>
-                    ))}
-                </Select>
-            </Form.Item>
             <Form.Item label="收货人" name="receiver">
                 <Input placeholder={'请输入收货人'} disabled={isCheckMode}/>
             </Form.Item>
             <Form.Item label="收货人电话" name="phone">
                 <Input placeholder={'请输入收货人电话'} disabled={isCheckMode}/>
+            </Form.Item>
+            <Form.Item label="收货地址" name="address">
+                <Input placeholder={'请输入收货地址'} disabled={isCheckMode}/>
             </Form.Item>
             <Form.Item label="操作">
                 <Button
@@ -96,4 +86,4 @@ const GroupAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
         </Form>
     );
 };
-export default GroupAction;
+export default ProductAction;

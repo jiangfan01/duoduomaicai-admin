@@ -15,6 +15,8 @@ interface DataType {
     address: string;
     image: string;
     siteAddress: string;
+    receiver: string;
+    phone: number
 }
 
 interface EditFormProps {
@@ -39,7 +41,9 @@ const PreferredAction: React.FC<EditFormProps> = ({action, record, onSubmit}) =>
                 id: record.id,
                 name: record.name,
                 price: record.price,
-                province: record.siteAddress,
+                siteAddress: record.siteAddress,
+                receiver: record.receiver,
+                phone: record.phone
             });
         } else {
             form.resetFields();
@@ -65,10 +69,16 @@ const PreferredAction: React.FC<EditFormProps> = ({action, record, onSubmit}) =>
             <Form.Item label="价格" name="price">
                 <InputNumber placeholder={'请输入价格'} disabled={isCheckMode} style={{width: 275}}/>
             </Form.Item>
+            <Form.Item label="收货人" name="receiver">
+                <Input placeholder={'请输入收货人'} disabled={isCheckMode}/>
+            </Form.Item>
+            <Form.Item label="收货人电话" name="phone">
+                <Input placeholder={'请输入收货人电话'} disabled={isCheckMode}/>
+            </Form.Item>
             <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
                 <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
-            <Form.Item label="站点" name="province">
+            <Form.Item label="站点" name="siteAddress">
                 <Select placeholder="请选择站点" disabled={isCheckMode}>
                     {siteAddress.map((item) => (
                         <Select.Option key={item.value} value={item.value}>

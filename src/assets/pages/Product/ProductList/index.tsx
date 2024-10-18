@@ -14,10 +14,8 @@ import {
 } from 'antd';
 import type {TableColumnsType} from 'antd';
 import "../../../style/table.scss";
-import ProductSearch from "../../Product/ProductList/components/ProductSearch.tsx";
-import ProductAction from "../../Product/ProductList/components/ProductAction.tsx";
-import GroupSearch from "./components/GroupSearch.tsx";
-import GroupAction from "./components/GroupAction.tsx";
+import ProductAction from "./components/ProductAction.tsx";
+import ProductSearch from "./components/ProductSearch.tsx";
 
 interface DataType {
     key: React.Key;
@@ -26,14 +24,14 @@ interface DataType {
     price: number;
     address: string;
     image: string;
-    siteAddress: string;
+    createTime: string;
     status: string;
     receiver: string;
     phone: number
 }
 
 
-const GroupList: React.FC = () => {
+const Product: React.FC = () => {
     const [open, setOpen] = useState(false);
     const [confirmLoading] = useState(false);
     const [currentAction, setCurrentAction] = useState<'add' | 'edit' | 'check'>('add');
@@ -81,6 +79,7 @@ const GroupList: React.FC = () => {
                 return 'error';
         }
     };
+
 
     const columns: TableColumnsType<DataType> = [
         {
@@ -137,7 +136,7 @@ const GroupList: React.FC = () => {
             )
         },
         {
-            title: "下单地址",
+            title: "收货地址",
             dataIndex: 'address',
             width: 200,
             align: "center",
@@ -165,23 +164,10 @@ const GroupList: React.FC = () => {
             )
         },
         {
-            title: "所属站点",
-            dataIndex: 'siteAddress',
+            title: "下单时间",
+            dataIndex: 'createTime',
             width: 100,
-            align: "center",
-            render: (text: string) => (
-                <Tooltip title={text}>
-                    <span style={{
-                        display: 'inline-block',
-                        maxWidth: '100%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
-                    }}>
-                        {text}
-                    </span>
-                </Tooltip>
-            )
+            align: "center"
         },
         {
             title: '操作',
@@ -216,6 +202,7 @@ const GroupList: React.FC = () => {
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             status: "已发货",
+            createTime: "2023-07-01",
             receiver: "王五",
             phone: "12345678901",
         },
@@ -228,6 +215,7 @@ const GroupList: React.FC = () => {
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             status: "配送中",
+            createTime: "2023-07-01",
             receiver: "张三",
             phone: "12345678902",
         },
@@ -240,6 +228,7 @@ const GroupList: React.FC = () => {
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             status: "已收货",
+            createTime: "2023-07-01",
             receiver: "李四",
             phone: "12345678903",
         },
@@ -255,20 +244,20 @@ const GroupList: React.FC = () => {
             }}
         >
             <div className="top-search">
-                <GroupSearch/>
+                <ProductSearch/>
                 <Button
                     onClick={() => showModal('add')}
                     type="primary"
                     style={{marginBottom: '20px'}}
                 >
-                    新增
+                    新增精选商品
                 </Button>
             </div>
+            <div style={{fontSize: 18, marginBottom: 20}}></div>
             <Table<DataType>
                 style={{marginTop: 20}}
                 columns={columns}
                 dataSource={data}
-                size="middle"
                 className="tableShadow"
                 scroll={{x: 'max-content'}}
             />
@@ -279,7 +268,7 @@ const GroupList: React.FC = () => {
                 onCancel={handleCancel}
                 footer={null}
             >
-                <GroupAction
+                <ProductAction
                     action={currentAction}
                     record={currentRecord}
                     onSubmit={handleFormSubmit}/>
@@ -288,4 +277,4 @@ const GroupList: React.FC = () => {
     );
 };
 
-export default GroupList;
+export default Product;
