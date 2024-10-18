@@ -5,6 +5,7 @@ import {
     Input, InputNumber,
     Select,
 } from 'antd';
+import UploadImg from "../../../../components/upload.tsx";
 
 interface DataType {
     key: React.Key;
@@ -63,6 +64,9 @@ const PreferredAction: React.FC<EditFormProps> = ({action, record, onSubmit}) =>
             </Form.Item>
             <Form.Item label="价格" name="price">
                 <InputNumber placeholder={'请输入价格'} disabled={isCheckMode} style={{width: 275}}/>
+            </Form.Item>
+            <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
+                <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
             <Form.Item label="站点" name="province">
                 <Select placeholder="请选择站点" disabled={isCheckMode}>

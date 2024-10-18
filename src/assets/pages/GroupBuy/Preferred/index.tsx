@@ -200,7 +200,7 @@ const Preferred: React.FC = () => {
             name: '苹果',
             price: 9.9,
             address: '湖北咸宁',
-            image: "",
+            image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             createTime: "2023-07-01",
             status: "配送中"
@@ -211,7 +211,7 @@ const Preferred: React.FC = () => {
             name: '香蕉',
             price: 8.8,
             address: '湖北武汉',
-            image: "",
+            image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             createTime: "2023-07-02",
             status: "已发货"
@@ -222,7 +222,7 @@ const Preferred: React.FC = () => {
             name: '梨子',
             price: 11.1,
             address: '湖北武汉天河机场',
-            image: "",
+            image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             createTime: "2023-07-03",
             status: "已收货"

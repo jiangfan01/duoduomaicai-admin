@@ -192,7 +192,7 @@ const GroupList: React.FC = () => {
             name: 'iPhone16',
             price: 15000,
             address: '湖北咸宁',
-            image: "",
+            image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             status: "已发货"
         },
@@ -202,7 +202,7 @@ const GroupList: React.FC = () => {
             name: 'mate 60 Pro',
             price: 6199,
             address: '湖北武汉',
-            image: "",
+            image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             status: "配送中"
         },
@@ -212,7 +212,7 @@ const GroupList: React.FC = () => {
             name: 'iPad Pro',
             price: 8999,
             address: '湖北武汉天河机场',
-            image: "",
+            image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             siteAddress: "南泰中央华府",
             status: "已收货"
         },
