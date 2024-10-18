@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {
+    Button,
     ConfigProvider,
     Image, Modal,
     Popconfirm,
     PopconfirmProps,
-    Space,
+    Space, Switch,
     Table,
     TableColumnsType,
 } from "antd";
@@ -20,14 +21,14 @@ interface DataType {
     price: number;
     image: string;
     category: string;
-    describe: string
+    describe: string;
 }
 
 const GoodsManage: React.FC = () => {
 
     const [open, setOpen] = useState(false);
     const [confirmLoading] = useState(false);
-    const [currentAction, setCurrentAction] = useState<'add' | 'edit' | 'check'>('add');
+    const [currentAction, setCurrentAction] = useState<'add' | 'edit' | 'check' | 'addTomorrowGoods'>('add');
     const [currentRecord, setCurrentRecord] = useState<DataType | null>(null);
 
 
@@ -40,7 +41,7 @@ const GoodsManage: React.FC = () => {
     };
 
 
-    const showModal = (action: 'add' | 'edit' | 'check', record?: DataType) => {
+    const showModal = (action: 'add' | 'edit' | 'check' | 'addTomorrowGoods', record?: DataType) => {
         setCurrentAction(action);
         setCurrentRecord(record || null);
         setOpen(true);
@@ -91,6 +92,15 @@ const GoodsManage: React.FC = () => {
                 />
             ),
             align: "center"
+        },
+        {
+            title: "上架/下架",
+            width: 100,
+            render: () => (
+                <Space direction="vertical">
+                    <Switch checkedChildren="上架" unCheckedChildren="下架" defaultChecked/>
+                </Space>
+            )
         },
         {
             title: '操作',
@@ -144,7 +154,15 @@ const GoodsManage: React.FC = () => {
 
     return (
         <>
-            <GoodsSearch></GoodsSearch>
+            <div className="top-search">
+                <GoodsSearch></GoodsSearch>
+                <Button type="primary" onClick={() => showModal('add')}>
+                    新增商品
+                </Button>
+                <Button type="primary" onClick={() => showModal('addTomorrowGoods')}>
+                    新增明日优选商品
+                </Button>
+            </div>
             <ConfigProvider
                 theme={{
                     token: {
@@ -161,7 +179,11 @@ const GoodsManage: React.FC = () => {
                     scroll={{x: 'max-content'}}
                 />
                 <Modal
-                    title={currentAction === 'add' ? '添加商品' : '修改商品'}
+                    title={
+                        currentAction === 'add' ? '添加商品' :
+                            currentAction === 'edit' ? '修改商品' :
+                                currentAction === 'addTomorrowGoods' ? '新增明日优选商品' : '查看商品'
+                    }
                     open={open}
                     confirmLoading={confirmLoading}
                     onCancel={handleCancel}

@@ -41,10 +41,11 @@ const SiderBar: React.FC = () => {
         getItem('首页', '/home', <PieChartOutlined/>),
         getItem('商品', '/goods', <MoneyCollectOutlined/>, [
             getItem("商品管理", '/goods/manage'),
-            getItem('上架商品', '/goods/add'),
+            // getItem('上架商品', '/goods/add'),
         ]),
         getItem('团购', '/groupbuy', <AccountBookOutlined/>, [
             getItem('团购订单', '/groupbuy/list'),
+            getItem('团购管理', '/groupbuy/manage'),
             getItem("今日优选", '/groupbuy/preferred')
         ]),
         getItem('精选', '/product', <CarryOutOutlined/>, [

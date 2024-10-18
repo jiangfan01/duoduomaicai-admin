@@ -1,11 +1,16 @@
 import React, {useEffect} from 'react';
 import {
-    Button,
+    Button, DatePicker,
     Form,
     Input, InputNumber,
     Select,
 } from 'antd';
 import UploadImg from "../../../../components/upload.tsx";
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
+dayjs.locale('zh-cn');
 
 interface DataType {
     key: React.Key;
@@ -17,7 +22,7 @@ interface DataType {
 }
 
 interface EditFormProps {
-    action: 'add' | 'edit' | 'check';
+    action: 'add' | 'edit' | 'check' | 'addTomorrowGoods';
     record: DataType | null;
     onSubmit: () => void;
 }
@@ -76,6 +81,18 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             </Form.Item>
             <Form.Item label="商品描述" name="describe">
                 <Input placeholder={'请输入描述'} disabled={isCheckMode}/>
+            </Form.Item>
+            <Form.Item label="时间范围" name="dateRange">
+                <DatePicker.RangePicker
+                    showTime={{format: 'HH:mm'}}
+                    format="YYYY-MM-DD HH:mm"
+                    placeholder={['开始时间', '结束时间']}
+                    style={{width: 275}}
+                    disabled={action !== 'addTomorrowGoods'}
+                    allowClear
+                    value={action === 'addTomorrowGoods' ? undefined : null}
+                    allowEmpty={action !== 'addTomorrowGoods'}
+                />
             </Form.Item>
 
             <Form.Item label="操作">

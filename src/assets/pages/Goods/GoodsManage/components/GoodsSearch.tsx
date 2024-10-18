@@ -13,9 +13,6 @@ const GoodsSearch: React.FC = () => {
             <Form
                 layout="inline"
             >
-                <Form.Item label="订单号" style={{width: 240}}>
-                    <Input placeholder={'请输入订单号'}/>
-                </Form.Item>
                 <Form.Item label="商品名" style={{width: 240}}>
                     <Input placeholder={'请输入商品名'}/>
                 </Form.Item>

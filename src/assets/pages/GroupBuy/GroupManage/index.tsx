@@ -33,7 +33,7 @@ const GroupManage: React.FC = () => {
 
     const columns: TableProps<DataType>['columns'] = [
         {
-            title: '分类名',
+            title: '团购分类名',
             dataIndex: 'name',
             key: 'name',
             align: 'center',

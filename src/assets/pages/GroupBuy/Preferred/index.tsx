@@ -5,7 +5,6 @@ import {
     Image,
     Tooltip,
     message,
-    Button,
     Modal,
     Space,
     Popconfirm,
@@ -170,7 +169,7 @@ const Preferred: React.FC = () => {
             align: "center",
             render: (_, record) => (
                 <Space size="middle">
-                    <a onClick={() => showModal('edit', record)}>修改</a>
+                    {/*<a onClick={() => showModal('edit', record)}>修改</a>*/}
                     <a onClick={() => showModal('check', record)}>查看</a>
                     <Popconfirm
                         title="确认删除？"
@@ -235,13 +234,13 @@ const Preferred: React.FC = () => {
         >
             <div className="top-search">
                 <PreferredSearch/>
-                <Button
-                    onClick={() => showModal('add')}
-                    type="primary"
-                    style={{marginBottom: '20px'}}
-                >
-                    添加明日优选
-                </Button>
+                {/*<Button*/}
+                {/*    onClick={() => showModal('add')}*/}
+                {/*    type="primary"*/}
+                {/*    style={{marginBottom: '20px'}}*/}
+                {/*>*/}
+                {/*    添加明日优选*/}
+                {/*</Button>*/}
             </div>
             <div style={{fontSize: 18, marginBottom: 20}}>历史优选:</div>
             <Table<DataType>

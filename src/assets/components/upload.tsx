@@ -26,7 +26,7 @@ const beforeUpload = (file: FileType) => {
 };
 
 interface UploadImgProps {
-    action: 'add' | 'edit' | 'check';
+    action: 'add' | 'edit' | 'check' | 'addTomorrowGoods';
     initialImageUrl?: string;
 }
 
