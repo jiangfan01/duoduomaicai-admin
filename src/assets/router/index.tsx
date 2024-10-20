@@ -14,102 +14,123 @@ import GoodsAfterSale from "../pages/AfterSale/GoodsAfterSale";
 import ProductAfterSale from "../pages/AfterSale/ProductAfterSale";
 import PreferredAfterSale from "../pages/AfterSale/PreferredAfterSale";
 import ServeAfterSale from "../pages/AfterSale/ServeAfterSale";
+import UserAdminList from "../pages/User/UserAdminList";
+import MiniProgramList from "../pages/User/ MiniProgramList";
+import LoginPage from "../pages/Login/Login";
 
 
 const routes = createBrowserRouter([
-    {
-        path: '/',
-        element: <LayoutIndex/>,
-        children: [
-            {index: true, element: <Home/>},
-            {
+        {
+            path: '/login',
+            element: <LoginPage/>
+        },
+        {
+            path: '/',
+            element: <LayoutIndex/>,
+            children: [
+                {index: true, element: <Home/>},
+                {
 
-                path: '/home',
-                element: <Home/>
-            },
-            {
-                path: '/goods',
-                children: [
-                    {
-                        path: '/goods/manage',
-                        element: <GoodsManage/>
-                    }
-                ]
-            },
-            {
-                path: '/groupbuy',
-                children: [
-                    {
-                        path: '/groupbuy/list',
-                        element: <GroupList/>
-                    },
-                    {
-                        path: '/groupbuy/preferred',
-                        element: <Preferred/>
-                    },
-                    {
-                        path: '/groupbuy/manage',
-                        element: <GroupManage/>
-                    }
-                ]
-            },
-            {
-                path: '/product',
-                children: [
-                    {
-                        path: '/product/list',
-                        element: <ProductList/>
-                    },
-                    {
-                        path: '/product/manage',
-                        element: <ProductManage/>
-                    }
-                ]
-            },
-            {
-                path: '/serve',
-                children: [
-                    {
-                        path: '/serve/list',
-                        element: <ServeList/>
-                    },
-                    {
-                        path: '/serve/manage',
-                        element: <ServeManage/>
-                    }
-                ]
-            },
-            {
-                path: '/site',
-                children: [
-                    {
-                        path: '/site/list',
-                        element: <SiteList/>
-                    }
-                ]
-            },
-            {
-                path: '/after-sale',
-                children: [
-                    {
-                        path: '/after-sale/goods',
-                        element: <GoodsAfterSale/>
-                    },
-                    {
-                        path: '/after-sale/product',
-                        element: <ProductAfterSale/>
-                    },
-                    {
-                        path: '/after-sale/preferred',
-                        element: <PreferredAfterSale/>
-                    },
-                    {
-                        path: '/after-sale/serve',
-                        element: <ServeAfterSale/>
-                    }
-                ]
-            }
-        ]
-    },
-]);
+                    path: '/home',
+                    element: <Home/>
+                },
+                {
+                    path: '/goods',
+                    children: [
+                        {
+                            path: '/goods/manage',
+                            element: <GoodsManage/>
+                        }
+                    ]
+                },
+                {
+                    path: '/groupbuy',
+                    children: [
+                        {
+                            path: '/groupbuy/list',
+                            element: <GroupList/>
+                        },
+                        {
+                            path: '/groupbuy/preferred',
+                            element: <Preferred/>
+                        },
+                        {
+                            path: '/groupbuy/manage',
+                            element: <GroupManage/>
+                        }
+                    ]
+                },
+                {
+                    path: '/product',
+                    children: [
+                        {
+                            path: '/product/list',
+                            element: <ProductList/>
+                        },
+                        {
+                            path: '/product/manage',
+                            element: <ProductManage/>
+                        }
+                    ]
+                },
+                {
+                    path: '/serve',
+                    children: [
+                        {
+                            path: '/serve/list',
+                            element: <ServeList/>
+                        },
+                        {
+                            path: '/serve/manage',
+                            element: <ServeManage/>
+                        }
+                    ]
+                },
+                {
+                    path: '/site',
+                    children: [
+                        {
+                            path: '/site/list',
+                            element: <SiteList/>
+                        }
+                    ]
+                },
+                {
+                    path: '/after-sale',
+                    children: [
+                        {
+                            path: '/after-sale/goods',
+                            element: <GoodsAfterSale/>
+                        },
+                        {
+                            path: '/after-sale/product',
+                            element: <ProductAfterSale/>
+                        },
+                        {
+                            path: '/after-sale/preferred',
+                            element: <PreferredAfterSale/>
+                        },
+                        {
+                            path: '/after-sale/serve',
+                            element: <ServeAfterSale/>
+                        }
+                    ]
+                },
+                {
+                    path: '/user',
+                    children: [
+                        {
+                            path: '/user/admin-list',
+                            element: <UserAdminList/>
+                        },
+                        {
+                            path: '/user/mini-list',
+                            element: <MiniProgramList/>
+                        }
+                    ]
+                }
+            ]
+        },
+    ])
+;
 export default routes

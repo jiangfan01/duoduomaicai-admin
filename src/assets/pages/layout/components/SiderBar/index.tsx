@@ -67,9 +67,8 @@ const SiderBar: React.FC = () => {
             getItem("服务售后", '/after-sale/serve'),
         ]),
         getItem('用户设置', '/user', <TeamOutlined/>, [
-            getItem('用户列表', '/user/list'),
-            getItem("站长列表", '/user/manage'),
-            getItem("管理员设置", '/user/admin'),
+            getItem('小程序用户列表', '/user/mini-list'),
+            getItem("后台用户列表", '/user/admin-list'),
         ]),
     ];
 

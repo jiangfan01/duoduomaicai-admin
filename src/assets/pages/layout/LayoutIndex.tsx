@@ -2,8 +2,9 @@ import React from 'react';
 import {ConfigProvider, Layout, theme, App} from 'antd';
 import SiderBar from "./components/SiderBar";
 import {Outlet} from "react-router-dom";
+import Header from "../../components/header.tsx";
 
-const {Header, Content, Footer} = Layout;
+const {Content, Footer} = Layout;
 
 
 const LayoutIndex: React.FC = () => {
@@ -28,7 +29,7 @@ const LayoutIndex: React.FC = () => {
                     <SiderBar/>
 
                     <Layout>
-                        <Header style={{padding: 0, background: colorBgContainer, marginBottom: 24}}/>
+                        <Header/>
                         <Content style={{margin: '0 16px',}}>
                             <div style={{
                                 background: colorBgContainer,
