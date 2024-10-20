@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Badge, Layout, message, Popconfirm, PopconfirmProps, Space} from "antd";
+import {Avatar, Layout, message, Popconfirm, PopconfirmProps, Space} from "antd";
 import "../style/header.scss"
 import {
     UserOutlined
@@ -18,18 +18,11 @@ const Header: React.FC = () => {
     const cancel: PopconfirmProps['onCancel'] = (e) => {
         console.log(e);
     };
-
-    const handleOder = () => {
-        navigate("/order")
-    }
-
     return (
         <>
             <Header style={{padding: 0, background: "#fff", marginBottom: 24}} className="header">
                 <div className="user-info">
-                    <Badge count={1} className="avatar" title="有新的订单" onClick={handleOder}>
                         <Avatar shape="square" icon={<UserOutlined/>} size={40} alt="头像"/>
-                    </Badge>
                     <div className="user-meun">
                         <Space size="middle">
                             <Popconfirm

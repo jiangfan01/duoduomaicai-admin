@@ -108,6 +108,7 @@ const OderCharts: React.FC = () => {
     // 日期选择回调
     const onDateChange: RangePickerProps['onChange'] = (dates) => {
         if (dates) {
+            // @ts-ignore
             setDateRange([dates[0], dates[1]]);
         } else {
             setDateRange(null);

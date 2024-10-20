@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import {
-    Button, DatePicker,
+    Button, Cascader, CascaderProps, DatePicker,
     Form,
     Input, InputNumber,
-    Select,
 } from 'antd';
 import UploadImg from "../../../../components/upload.tsx";
 import dayjs from 'dayjs';
@@ -27,11 +26,6 @@ interface EditFormProps {
     onSubmit: () => void;
 }
 
-const category = [
-    {value: '1', label: '团购'},
-    {value: '2', label: '精选'},
-    {value: '3', label: '服务'},
-];
 const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
     const handleFormSubmit = () => {
         onSubmit();
@@ -53,6 +47,52 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
     }, [record, form]);
 
     const isCheckMode = action === 'check';
+
+    interface Option {
+        value: string;
+        label: string;
+        children?: Option[];
+    }
+
+    const options: Option[] = [
+        {
+            value: '1',
+            label: '团购',
+            children: [
+                {
+                    value: '2',
+                    label: '水果',
+                },
+                {
+                    value: '3',
+                    label: '生鲜',
+                },
+                {
+                    value: '4',
+                    label: '电子产品',
+                },
+            ],
+        },
+        {
+            value: 'serve',
+            label: '服务',
+            children: [
+                {
+                    value: 'jiazheng',
+                    label: '家政',
+                },
+                {
+                    value: 'fudao',
+                    label: '辅导',
+                },
+            ],
+        },
+    ];
+
+    const onChange: CascaderProps<Option>['onChange'] = (value) => {
+        console.log(value);
+    };
+
     return (
         <Form
             labelCol={{span: 4}}
@@ -71,14 +111,8 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
                 <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
             {action !== "addTomorrowGoods" && (
-                <Form.Item label="分类" name="category">
-                    <Select placeholder="请选择分类" disabled={isCheckMode}>
-                        {category.map((item) => (
-                            <Select.Option key={item.value} value={item.value}>
-                                {item.label}
-                            </Select.Option>
-                        ))}
-                    </Select>
+                <Form.Item label="分类">
+                    <Cascader options={options} onChange={onChange} placeholder="请选择"/>
                 </Form.Item>
             )}
             <Form.Item label="商品描述" name="describe">

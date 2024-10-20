@@ -1,38 +1,38 @@
 import React from "react";
-import {Descriptions, Divider, Empty} from "antd";
+import '../../../style/table.scss';
 
 interface Order {
     label: string;
     children: string;
 }
 
-interface Props {
+interface OrderDetailsProps {
     orders: Order[][];
+    id?: string;
 }
 
-const OrderDetails: React.FC<Props> = ({orders}) => {
-    if (orders.length === 0 || orders.every(order => order.length === 0)) {
-        return <Empty description="无数据"/>;
-    }
-
+const OrderDetails: React.FC<OrderDetailsProps> = ({orders, id}) => {
+    // @ts-ignore
     return (
-        <div>
-            {orders.map((orderGroup, groupIndex) => (
-                <React.Fragment key={groupIndex}>
-                    <Descriptions bordered items={orderGroup.map(order => ({
-                        label: order.label,
-                        children: order.children,
-                        span: 1,
-                    }))} title={`精选订单：`} column={{xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1}}>
-                        {orderGroup.map((_, index) => (
-                            <React.Fragment key={index}>
-                                {index !== 0 && <Divider style={{margin: '16px 0'}}/>}
-                            </React.Fragment>
+        <div id={id} className="table-container">
+            <table className="table">
+                <thead>
+                <tr>
+                    {orders[0].map((order) => (
+                        <th key={order.label}>{order.label}</th>
+                    ))}
+                </tr>
+                </thead>
+                <tbody>
+                {orders.map((orderRow, rowIndex) => (
+                    <tr key={rowIndex}>
+                        {orderRow.map((order, colIndex) => (
+                            <td key={colIndex}>{order.children}</td>
                         ))}
-                    </Descriptions>
-                    {groupIndex !== orders.length - 1 && <Divider style={{margin: '32px 0'}}/>}
-                </React.Fragment>
-            ))}
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </div>
     );
 };
