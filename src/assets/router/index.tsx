@@ -17,6 +17,7 @@ import ServeAfterSale from "../pages/AfterSale/ServeAfterSale";
 import UserAdminList from "../pages/User/UserAdminList";
 import MiniProgramList from "../pages/User/ MiniProgramList";
 import LoginPage from "../pages/Login/Login";
+import OrderPage from "../pages/Order";
 
 
 const routes = createBrowserRouter([
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
 
                     path: '/home',
                     element: <Home/>
+                },
+                {
+                    path: '/order',
+                    element: <OrderPage/>
                 },
                 {
                     path: '/goods',

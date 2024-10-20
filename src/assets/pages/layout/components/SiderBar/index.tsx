@@ -9,7 +9,8 @@ import {
     AliwangwangOutlined,
     TeamOutlined,
     DropboxOutlined,
-    MoneyCollectOutlined
+    MoneyCollectOutlined,
+    EuroOutlined
 } from "@ant-design/icons";
 import {To, useNavigate} from "react-router-dom";
 
@@ -39,6 +40,7 @@ const SiderBar: React.FC = () => {
     };
     const items: MenuItem[] = [
         getItem('首页', '/home', <PieChartOutlined/>),
+        getItem('最新订单', '/order', <EuroOutlined/>),
         getItem('商品', '/goods', <MoneyCollectOutlined/>, [
             getItem("商品管理", '/goods/manage'),
             // getItem('上架商品', '/goods/add'),

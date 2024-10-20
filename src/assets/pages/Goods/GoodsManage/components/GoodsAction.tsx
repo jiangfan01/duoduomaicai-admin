@@ -70,15 +70,17 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
                 <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
-            <Form.Item label="分类" name="category">
-                <Select placeholder="请选择分类" disabled={isCheckMode}>
-                    {category.map((item) => (
-                        <Select.Option key={item.value} value={item.value}>
-                            {item.label}
-                        </Select.Option>
-                    ))}
-                </Select>
-            </Form.Item>
+            {action !== "addTomorrowGoods" && (
+                <Form.Item label="分类" name="category">
+                    <Select placeholder="请选择分类" disabled={isCheckMode}>
+                        {category.map((item) => (
+                            <Select.Option key={item.value} value={item.value}>
+                                {item.label}
+                            </Select.Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            )}
             <Form.Item label="商品描述" name="describe">
                 <Input placeholder={'请输入描述'} disabled={isCheckMode}/>
             </Form.Item>
