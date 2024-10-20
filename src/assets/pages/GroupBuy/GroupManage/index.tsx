@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ConfigProvider, Input, message, Modal, Space, Table} from 'antd';
+import {Button, ConfigProvider, Input, message, Modal, Popconfirm, PopconfirmProps, Table} from 'antd';
 import type {TableProps} from 'antd';
 
 interface DataType {
@@ -13,8 +13,12 @@ const GroupManage: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const showModal = () => {
-        setIsModalOpen(true);
+    const confirm: PopconfirmProps['onConfirm'] = (e) => {
+        console.log(e);
+    };
+
+    const cancel: PopconfirmProps['onCancel'] = (e) => {
+        console.log(e);
     };
 
     const handleOk = () => {
@@ -48,10 +52,15 @@ const GroupManage: React.FC = () => {
             key: 'action',
             align: 'center',
             render: () => (
-                <Space size="middle">
-                    <a onClick={showModal}>新增分类</a>
-                    <a>删除分类</a>
-                </Space>
+                <Popconfirm
+                    title="确认删除当前团购分类？"
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="确认"
+                    cancelText="取消"
+                >
+                    <a>删除</a>
+                </Popconfirm>
             ),
         },
     ];
@@ -72,7 +81,9 @@ const GroupManage: React.FC = () => {
     ];
     return (
         <>
-            <div></div>
+            <div className="top-search" style={{marginBottom: 24}}>
+                <Button type="primary" onClick={() => setIsModalOpen(true)}>新增团购分类</Button>
+            </div>
             <ConfigProvider
                 theme={{
                     token: {
@@ -83,7 +94,7 @@ const GroupManage: React.FC = () => {
                 <Table columns={columns} dataSource={data} className="tableShadow"
                        scroll={{x: 'max-content'}}/>
 
-                <Modal title="新增分类" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Modal title="新增团购分类" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                     <Input/>
                 </Modal>
             </ConfigProvider>
