@@ -65,8 +65,6 @@ const OrderPage: React.FC = () => {
 
     useEffect(() => {
         if (tableRef.current) {
-            console.log(`当前选中的 Tab 是: tab-${activeKey}`);
-            console.log(tableRef.current);  // 检查表格内容是否正确
         }
     }, [activeKey]);
 

@@ -47,6 +47,7 @@ const PreferredTab: React.FC = () => {
             {label: '下单地址', children: '万达1111111111111111111'},
             {label: '下单站点', children: '南泰中央华府'},
             {label: '本单提成', children: '2.99'},
+            {label: '描述', children: '顶级苹果'},
         ],
         [
             {label: '商品名', children: '香蕉'},
@@ -56,6 +57,7 @@ const PreferredTab: React.FC = () => {
             {label: '下单地址', children: '王府井1111111111111111111'},
             {label: '下单站点', children: '王府井中央华府'},
             {label: '本单提成', children: '3.50'},
+            {label: '描述', children: '顶级香蕉'},
         ],
         [
             {label: '商品名', children: '橙子'},
@@ -65,7 +67,18 @@ const PreferredTab: React.FC = () => {
             {label: '下单地址', children: '国贸1111111111111111111'},
             {label: '下单站点', children: '国贸中央华府'},
             {label: '本单提成', children: '4.00'},
-        ]
+            {label: '描述', children: '顶级水果'},
+        ],
+        [
+            {label: '商品名', children: '苹果'},
+            {label: '价格', children: '200'},
+            {label: '下单时间', children: '2024-10-10'},
+            {label: '顾客电话', children: '17771513712'},
+            {label: '下单地址', children: '万达1111111111111111111'},
+            {label: '下单站点', children: '南泰中央华府'},
+            {label: '本单提成', children: '2.99'},
+            {label: '描述', children: '顶级水果'},
+        ],
     ];
 
     return (

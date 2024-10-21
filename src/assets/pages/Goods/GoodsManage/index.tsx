@@ -22,6 +22,8 @@ interface DataType {
     image: string;
     category: string;
     describe: string;
+    amount: number;
+    remark: string;
 }
 
 const GoodsManage: React.FC = () => {
@@ -69,6 +71,12 @@ const GoodsManage: React.FC = () => {
             align: "center"
         },
         {
+            title: "库存",
+            dataIndex: 'amount',
+            width: 100,
+            align: "center"
+        },
+        {
             title: "所属分类",
             dataIndex: 'category',
             width: 100,
@@ -77,6 +85,12 @@ const GoodsManage: React.FC = () => {
         {
             title: "商品描述",
             dataIndex: 'describe',
+            width: 100,
+            align: "center"
+        },
+        {
+            title: "商品备注",
+            dataIndex: 'remark',
             width: 100,
             align: "center"
         },
@@ -130,25 +144,31 @@ const GoodsManage: React.FC = () => {
             key: '1',
             name: 'iPhone16',
             price: 15000,
+            amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             category: "团购",
-            describe: "极品"
+            describe: "极品",
+            remark: "备注",
         },
         {
             key: '2',
             name: 'mate 60 Pro',
             price: 6199,
+            amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             category: "精选",
-            describe: "极品"
+            describe: "极品",
+            remark: "备注",
         },
         {
             key: '3',
             name: 'iPad Pro',
             price: 8999,
+            amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             category: "服务",
-            describe: "极品"
+            describe: "极品",
+            remark: "备注",
         },
     ];
 

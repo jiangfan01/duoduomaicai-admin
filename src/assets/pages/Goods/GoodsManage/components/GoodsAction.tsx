@@ -17,7 +17,8 @@ interface DataType {
     price: number;
     image: string;
     category: string;
-    describe: string
+    describe: string;
+    amount: number;
 }
 
 interface EditFormProps {
@@ -40,6 +41,7 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
                 image: record.image,
                 category: record.category,
                 describe: record.describe,
+                amount: record.amount,
             });
         } else {
             form.resetFields();
@@ -107,11 +109,14 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             <Form.Item label="价格" name="price">
                 <InputNumber placeholder={'请输入价格'} disabled={isCheckMode} style={{width: 275}}/>
             </Form.Item>
+            <Form.Item label="数量" name="amount">
+                <InputNumber placeholder={'请输入商品数量'} disabled={isCheckMode} style={{width: 275}}/>
+            </Form.Item>
             <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
                 <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
             {action !== "addTomorrowGoods" && (
-                <Form.Item label="分类">
+                <Form.Item label="分类" name="category">
                     <Cascader options={options} onChange={onChange} placeholder="请选择"/>
                 </Form.Item>
             )}
