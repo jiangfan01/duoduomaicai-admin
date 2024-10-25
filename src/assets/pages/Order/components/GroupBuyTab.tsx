@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import '../../../style/table.scss';
 
 interface Order {
@@ -12,7 +12,6 @@ interface OrderDetailsProps {
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = ({orders, id}) => {
-    // @ts-ignore
     return (
         <div id={id} className="table-container">
             <table className="table">
@@ -36,59 +35,44 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({orders, id}) => {
         </div>
     );
 };
-const GroupBuyTab: React.FC = () => {
+
+const GroupBuyTab = React.forwardRef((_, ref) => {
     const orders: Order[][] = [
+        // 示例数据
         [
-            {label: '商品名', children: '苹果'},
-            {label: '金额', children: '200'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-10'},
-            {label: '顾客电话', children: '17771513712'},
-            {label: '下单地址', children: '万达1111111111111111111'},
-            {label: '下单站点', children: '南泰中央华府'},
-            {label: '本单提成', children: '2.99'},
-            {label: '描述', children: '顶级苹果'},
+            {label: '商品名', children: '商品A'},
+            {label: '金额', children: '100'},
+            {label: '数量', children: '10'},
+            {label: '下单时间', children: '2024-10-01'},
+            {label: '顾客电话', children: '13800138000'},
+            {label: '下单地址', children: '地址A'},
+            {label: '下单站点', children: '站点A'},
+            {label: '本单提成', children: '1.50'},
+            {label: '描述', children: '描述A'},
         ],
         [
-            {label: '商品名', children: '香蕉'},
-            {label: '金额', children: '150'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-11'},
-            {label: '顾客电话', children: '18888888888'},
-            {label: '下单地址', children: '王府井1111111111111111111'},
-            {label: '下单站点', children: '王府井中央华府'},
-            {label: '本单提成', children: '3.50'},
-            {label: '描述', children: '顶级香蕉'},
+            {label: '商品名', children: '商品B'},
+            {label: '金额', children: '10'},
+            {label: '数量', children: '1'},
+            {label: '下单时间', children: '2024-10-01'},
+            {label: '顾客电话', children: '1111111111'},
+            {label: '下单地址', children: '地址B'},
+            {label: '下单站点', children: '站点B'},
+            {label: '本单提成', children: '1.50'},
+            {label: '描述', children: '描述B'},
         ],
-        [
-            {label: '商品名', children: '橙子'},
-            {label: '金额', children: '180'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-12'},
-            {label: '顾客电话', children: '19999999999'},
-            {label: '下单地址', children: '国贸1111111111111111111'},
-            {label: '下单站点', children: '国贸中央华府'},
-            {label: '本单提成', children: '4.00'},
-            {label: '描述', children: '顶级水果'},
-        ],
-        [
-            {label: '商品名', children: '苹果'},
-            {label: '金额', children: '200'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-10'},
-            {label: '顾客电话', children: '17771513712'},
-            {label: '下单地址', children: '万达1111111111111111111'},
-            {label: '下单站点', children: '南泰中央华府'},
-            {label: '本单提成', children: '2.99'},
-            {label: '描述', children: '顶级水果'},
-        ],
+        // 其他订单数据
     ];
+
+    React.useImperativeHandle(ref, () => ({
+        getOrders: () => orders,
+    }));
 
     return (
         <div>
             <OrderDetails orders={orders} id="tab-1"/>
         </div>
     );
-};
+});
 
 export default GroupBuyTab;

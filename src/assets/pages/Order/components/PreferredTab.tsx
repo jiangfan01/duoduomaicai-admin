@@ -12,7 +12,6 @@ interface OrderDetailsProps {
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = ({orders, id}) => {
-    // @ts-ignore
     return (
         <div id={id} className="table-container">
             <table className="table">
@@ -37,59 +36,31 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({orders, id}) => {
     );
 };
 
-const PreferredTab: React.FC = () => {
+const PreferredTab = React.forwardRef((_, ref) => {
     const orders: Order[][] = [
+        // 示例数据
         [
-            {label: '商品名', children: '苹果'},
+            {label: '商品名', children: '商品C'},
             {label: '金额', children: '200'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-10'},
-            {label: '顾客电话', children: '17771513712'},
-            {label: '下单地址', children: '万达1111111111111111111'},
-            {label: '下单站点', children: '南泰中央华府'},
-            {label: '本单提成', children: '2.99'},
-            {label: '描述', children: '顶级苹果'},
+            {label: '下单时间', children: '2024-10-03'},
+            {label: '顾客电话', children: '13800138002'},
+            {label: '下单地址', children: '地址C'},
+            {label: '下单站点', children: '站点C'},
+            {label: '本单提成', children: '2.50'},
+            {label: '描述', children: '描述C'},
         ],
-        [
-            {label: '商品名', children: '香蕉'},
-            {label: '金额', children: '150'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-11'},
-            {label: '顾客电话', children: '18888888888'},
-            {label: '下单地址', children: '王府井1111111111111111111'},
-            {label: '下单站点', children: '王府井中央华府'},
-            {label: '本单提成', children: '3.50'},
-            {label: '描述', children: '顶级香蕉'},
-        ],
-        [
-            {label: '商品名', children: '橙子'},
-            {label: '金额', children: '180'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-12'},
-            {label: '顾客电话', children: '19999999999'},
-            {label: '下单地址', children: '国贸1111111111111111111'},
-            {label: '下单站点', children: '国贸中央华府'},
-            {label: '本单提成', children: '4.00'},
-            {label: '描述', children: '顶级水果'},
-        ],
-        [
-            {label: '商品名', children: '苹果'},
-            {label: '金额', children: '200'},
-            {label: '数量', children: '20'},
-            {label: '下单时间', children: '2024-10-10'},
-            {label: '顾客电话', children: '17771513712'},
-            {label: '下单地址', children: '万达1111111111111111111'},
-            {label: '下单站点', children: '南泰中央华府'},
-            {label: '本单提成', children: '2.99'},
-            {label: '描述', children: '顶级水果'},
-        ],
+        // 其他订单数据
     ];
+    console.log(ref, 999)
+    React.useImperativeHandle(ref, () => ({
+        getOrders: () => orders,
+    }));
 
     return (
         <div>
-            <OrderDetails orders={orders} id="tab-2"/>
+            <OrderDetails orders={orders} id="tab-4"/>
         </div>
     );
-};
+});
 
 export default PreferredTab;

@@ -130,16 +130,18 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
                     value={form.getFieldValue('commission') || 0}
                 />
             </Form.Item>
-            <Form.Item label="时间范围" name="dateRange">
-                <DatePicker.RangePicker
-                    showTime={{format: 'HH:mm'}}
-                    format="YYYY-MM-DD HH:mm"
-                    placeholder={['开始时间', '结束时间']}
-                    style={{width: 275}}
-                    disabled={action !== 'addTomorrowGoods'}
-                    allowClear
-                />
-            </Form.Item>
+            {action === 'addTomorrowGoods' && (
+                <Form.Item label="时间范围" name="dateRange">
+                    <DatePicker.RangePicker
+                        showTime={{format: 'HH:mm'}}
+                        format="YYYY-MM-DD HH:mm"
+                        placeholder={['开始时间', '结束时间']}
+                        style={{width: 275}}
+                        allowClear
+                    />
+                </Form.Item>
+            )}
+
             <Form.Item label="操作">
                 <Button type="primary" onClick={onSubmit}>
                     {action === 'check' ? '关闭' : '提交'}

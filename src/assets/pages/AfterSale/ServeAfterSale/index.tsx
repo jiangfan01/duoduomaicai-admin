@@ -75,7 +75,7 @@ const ServeAfterSale: React.FC = () => {
             align: "center"
         },
         {
-            title: "价格",
+            title: "金额",
             dataIndex: 'price',
             width: 100,
             align: "center"

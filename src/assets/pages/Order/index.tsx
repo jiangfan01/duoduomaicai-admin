@@ -11,38 +11,40 @@ import * as XLSX from 'xlsx';
 // @ts-ignore
 import {saveAs} from 'file-saver';
 
-const items: TabsProps['items'] = [
-    {
-        key: '1',
-        label: '团购',
-        // @ts-ignore
-        children: <GroupBuyTab id="tab-1"/>, // 给每个 Tab 一个唯一的 id
-    },
-    {
-        key: '2',
-        label: '精选',
-        // @ts-ignore
-        children: <ProductTab id="tab-2"/>, // 给每个 Tab 一个唯一的 id
-    },
-    {
-        key: '3',
-        label: '服务',
-        // @ts-ignore
-        children: <ServeTab id="tab-3"/>, // 给每个 Tab 一个唯一的 id
-    },
-    {
-        key: '4',
-        label: '今日优选',
-        // @ts-ignore
-        children: <PreferredTab id="tab-4"/>, // 给每个 Tab 一个唯一的 id
-    },
-];
-
 const OrderPage: React.FC = () => {
-    const [setSelectedDate] = useState<moment.Moment | null>(null);
+    const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(null);
     const [activeKey, setActiveKey] = useState<string>('1');
     const tableRef = useRef<HTMLDivElement>(null);
-
+    const groupBuyRef = useRef<any>(null);
+    const preferredRef = useRef<any>(null);
+    const productRef = useRef<any>(null);
+    const serveRef = useRef<any>(null);
+    const items: TabsProps['items'] = [
+        {
+            key: '1',
+            label: '团购',
+            // @ts-ignore
+            children: <GroupBuyTab id="tab-1" ref={groupBuyRef}/>,
+        },
+        {
+            key: '2',
+            label: '精选',
+            // @ts-ignore
+            children: <ProductTab id="tab-2" ref={productRef}/>,
+        },
+        {
+            key: '3',
+            label: '服务',
+            // @ts-ignore
+            children: <ServeTab id="tab-3" ref={serveRef}/>,
+        },
+        {
+            key: '4',
+            label: '今日优选',
+            // @ts-ignore
+            children: <PreferredTab id="tab-4" ref={preferredRef}/>,
+        },
+    ];
 
     const customTheme = {
         token: {
@@ -56,7 +58,6 @@ const OrderPage: React.FC = () => {
     };
 
     const onDateChange = (date: moment.Moment | null) => {
-        // @ts-ignore
         setSelectedDate(date);
         if (date) {
             console.log('选择的日期是:', date.format('YYYY-MM-DD'));
@@ -65,26 +66,43 @@ const OrderPage: React.FC = () => {
 
     useEffect(() => {
         if (tableRef.current) {
+            // 这里可以添加一些逻辑来处理 activeKey 变化时的操作
         }
     }, [activeKey]);
 
     // 导出当前选中的 Tab 数据为 Excel
     const exportExcel = () => {
         const today = dayjs().format('YYYY-MM-DD');
-
-        if (tableRef.current) {
-            const table = tableRef.current.querySelector('table');
-            if (table) {
-                const wb = XLSX.utils.table_to_book(table, {sheet: 'Sheet1'});
-                const wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'array'});
-                const blob = new Blob([wbout], {type: 'application/octet-stream'});
-                saveAs(blob, `order_${today}.xlsx`); // 保存为 Excel
-            } else {
-                console.error('没有找到表格元素');
-            }
-        } else {
-            console.error('当前 Tab 没有找到对应的内容');
+        let orders = [];
+        // 根据 activeKey 获取对应 Tab 的数据
+        switch (activeKey) {
+            case '1':
+                orders = groupBuyRef.current.getOrders();
+                console.log(orders, 111)
+                break;
+            case '2':
+                orders = productRef.current.getOrders();
+                break;
+            case '3':
+                orders = serveRef.current.getOrders();
+                break;
+            case '4':
+                orders = preferredRef.current.getOrders();
+                break;
+            default:
+                break;
         }
+
+        // 将数据转换为表格形式
+        const worksheetData = orders.map((orderRow: any[]) => orderRow.map(order => order.children));
+        const worksheet = XLSX.utils.aoa_to_sheet([orders[0].map((order: {
+            label: any;
+        }) => order.label), ...worksheetData]);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+        const wbout = XLSX.write(workbook, {bookType: 'xlsx', type: 'array'});
+        const blob = new Blob([wbout], {type: 'application/octet-stream'});
+        saveAs(blob, `order_${today}.xlsx`);
     };
 
     return (
@@ -92,11 +110,10 @@ const OrderPage: React.FC = () => {
             <div style={{display: 'flex', alignItems: 'center'}}>
                 <DatePicker
                     picker="date"
-
                     disabledDate={disabledDate}
                     onChange={onDateChange}
                 />
-                <Button type="primary" onClick={exportExcel}  style={{marginLeft: 8}}>导出Excel</Button>
+                <Button type="primary" onClick={exportExcel} style={{marginLeft: 8}}>导出Excel</Button>
             </div>
 
             <ConfigProvider theme={customTheme}>
@@ -105,7 +122,7 @@ const OrderPage: React.FC = () => {
                         defaultActiveKey="1"
                         centered
                         items={items}
-                        onChange={(key) => setActiveKey(key)} // 记录当前选中的 Tab
+                        onChange={(key) => setActiveKey(key)}
                     />
                 </div>
             </ConfigProvider>
