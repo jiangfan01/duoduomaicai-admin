@@ -45,7 +45,7 @@ const ServeTab: React.FC = () => {
                 children: '家教',
             },
             {
-                label: '价格',
+                label: '金额',
                 children: '200',
             },
             {
@@ -67,7 +67,7 @@ const ServeTab: React.FC = () => {
                 children: '洗车',
             },
             {
-                label: '价格',
+                label: '金额',
                 children: '150',
             },
             {
@@ -89,7 +89,7 @@ const ServeTab: React.FC = () => {
                 children: '家政',
             },
             {
-                label: '价格',
+                label: '金额',
                 children: '180',
             },
             {

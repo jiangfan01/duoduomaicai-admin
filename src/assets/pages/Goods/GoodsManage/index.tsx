@@ -19,6 +19,7 @@ interface DataType {
     key: React.Key;
     name: string;
     price: number;
+    prePrice: number;
     image: string;
     category: string;
     describe: string;
@@ -65,8 +66,14 @@ const GoodsManage: React.FC = () => {
             align: "center"
         },
         {
-            title: "价格",
+            title: "现价",
             dataIndex: 'price',
+            width: 100,
+            align: "center"
+        },
+        {
+            title: "优惠之前",
+            dataIndex: 'prePrice',
             width: 100,
             align: "center"
         },
@@ -144,6 +151,7 @@ const GoodsManage: React.FC = () => {
             key: '1',
             name: 'iPhone16',
             price: 15000,
+            prePrice:18000,
             amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             category: "团购",
@@ -154,6 +162,7 @@ const GoodsManage: React.FC = () => {
             key: '2',
             name: 'mate 60 Pro',
             price: 6199,
+            prePrice:18000,
             amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             category: "精选",
@@ -164,6 +173,7 @@ const GoodsManage: React.FC = () => {
             key: '3',
             name: 'iPad Pro',
             price: 8999,
+            prePrice:18000,
             amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             category: "服务",

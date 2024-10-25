@@ -20,6 +20,7 @@ interface DataType {
     id: number;
     name: string;
     price: number;
+    prePrice: number;
     address: string;
     image: string;
     createTime: string;
@@ -63,7 +64,6 @@ const Product: React.FC = () => {
     };
 
 
-
     const columns: TableColumnsType<DataType> = [
         {
             title: '订单号',
@@ -83,8 +83,14 @@ const Product: React.FC = () => {
             align: "center"
         },
         {
-            title: "价格",
+            title: "现价",
             dataIndex: 'price',
+            width: 100,
+            align: "center"
+        },
+        {
+            title: "优惠之前价格",
+            dataIndex: 'prePrice',
             width: 100,
             align: "center"
         },
@@ -172,6 +178,7 @@ const Product: React.FC = () => {
             id: 1,
             name: 'iPhone16',
             price: 15000,
+            prePrice: 18000,
             address: '湖北咸宁',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             createTime: "2023-07-01",
@@ -183,6 +190,7 @@ const Product: React.FC = () => {
             id: 2,
             name: 'mate 60 Pro',
             price: 6199,
+            prePrice: 18000,
             address: '湖北武汉',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             createTime: "2023-07-01",
@@ -194,6 +202,7 @@ const Product: React.FC = () => {
             id: 3,
             name: 'iPad Pro',
             price: 8999,
+            prePrice: 18000,
             address: '湖北武汉天河机场',
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             createTime: "2023-07-01",
