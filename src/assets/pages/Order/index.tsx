@@ -12,6 +12,7 @@ import * as XLSX from 'xlsx';
 import {saveAs} from 'file-saver';
 
 const OrderPage: React.FC = () => {
+    // @ts-ignore
     const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(null);
     const [activeKey, setActiveKey] = useState<string>('1');
     const tableRef = useRef<HTMLDivElement>(null);
@@ -74,20 +75,24 @@ const OrderPage: React.FC = () => {
     const exportExcel = () => {
         const today = dayjs().format('YYYY-MM-DD');
         let orders = [];
+        let tag: string = ""
         // 根据 activeKey 获取对应 Tab 的数据
         switch (activeKey) {
             case '1':
                 orders = groupBuyRef.current.getOrders();
-                console.log(orders, 111)
+                tag = "团购";
                 break;
             case '2':
                 orders = productRef.current.getOrders();
+                tag = "精选";
                 break;
             case '3':
                 orders = serveRef.current.getOrders();
+                tag = "服务";
                 break;
             case '4':
                 orders = preferredRef.current.getOrders();
+                tag = "今日优选";
                 break;
             default:
                 break;
@@ -102,7 +107,7 @@ const OrderPage: React.FC = () => {
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
         const wbout = XLSX.write(workbook, {bookType: 'xlsx', type: 'array'});
         const blob = new Blob([wbout], {type: 'application/octet-stream'});
-        saveAs(blob, `order_${today}.xlsx`);
+        saveAs(blob, `${tag}${today}.xlsx`);
     };
 
     return (

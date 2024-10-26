@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Cascader, CascaderProps, DatePicker, Form, Input, InputNumber} from 'antd';
+import {Button, Cascader, CascaderProps, DatePicker, Form, Input, InputNumber, Select, Switch} from 'antd';
 import UploadImg from "../../../../components/upload.tsx";
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -21,7 +21,8 @@ interface DataType {
     price: number;
     prePrice: number;
     image: string;
-    category: string;
+    menuCategory: string;
+    serveCategory: string;
     describe: string;
     amount: number;
     commission: number;
@@ -44,13 +45,14 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
                 price: record.price,
                 image: record.image,
                 prePrice: record.prePrice,
-                category: record.category,
+                menuCategory: record.menuCategory,
+                serveCategory: record.serveCategory,
                 describe: record.describe,
                 amount: record.amount,
                 commission: record.commission || 0, // 设置默认值
             });
             // 检查是否需要禁用提成输入框
-            setIsCommissionDisabled(record.category === '服务');
+            setIsCommissionDisabled(record.menuCategory === '服务');
         } else {
             form.resetFields();
         }
@@ -70,12 +72,30 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
     const options: Option[] = [
         {
             value: '1',
+            label: '水果',
+
+        },
+        {
+            value: 'shengxian',
+            label: '生鲜',
+        },
+        {
+            value: 'dianzi',
+            label: '电子',
+        },
+        {
+            value: 'roulei',
+            label: '肉类',
+        },
+
+    ];
+
+
+    const serveOptions: Option[] = [
+        {
+            value: '1',
             label: '团购',
-            children: [
-                {value: '2', label: '水果'},
-                {value: '3', label: '生鲜'},
-                {value: '4', label: '电子产品'},
-            ],
+
         },
         {
             value: 'jingxuan',
@@ -84,12 +104,9 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
         {
             value: 'serve',
             label: '服务',
-            children: [
-                {value: 'jiazheng', label: '家政'},
-                {value: 'fudao', label: '辅导'},
-            ],
         },
     ];
+
 
     return (
         <Form
@@ -114,12 +131,17 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
                 <UploadImg action={action} initialImageUrl={record?.image}/>
             </Form.Item>
-            {/*{action !== 'addTomorrowGoods' && (*/}
-            <Form.Item label="分类" name="category">
-                <Cascader options={options} onChange={onChange} disabled={action === 'addTomorrowGoods'}
+            <Form.Item label="菜单分类" name="menuCategory">
+                <Cascader options={options} onChange={onChange} disabled={isCheckMode}
                           placeholder="请选择"/>
             </Form.Item>
-            {/*)}*/}
+            <Form.Item label="服务分类" name="serveCategory">
+                <Select mode="multiple" options={serveOptions} disabled={isCheckMode}
+                        placeholder="请选择"/>
+            </Form.Item>
+            <Form.Item label="今日优选">
+                <Switch checkedChildren="今日优选" unCheckedChildren="关闭" defaultChecked disabled={isCheckMode}/>
+            </Form.Item>
             <Form.Item label="商品描述" name="describe">
                 <Input placeholder="请输入描述" disabled={isCheckMode}/>
             </Form.Item>

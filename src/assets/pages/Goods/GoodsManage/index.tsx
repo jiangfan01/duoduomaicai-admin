@@ -7,7 +7,7 @@ import {
     PopconfirmProps,
     Space, Switch,
     Table,
-    TableColumnsType,
+    TableColumnsType, Tag,
 } from "antd";
 import "../../../style/table.scss";
 import GoodsAction from "./components/GoodsAction.tsx";
@@ -21,9 +21,11 @@ interface DataType {
     price: number;
     prePrice: number;
     image: string;
-    category: string;
+    menuCategory: string;
+    serveCategory: string;
     describe: string;
     amount: number;
+    commission: number;
     remark: string;
 }
 
@@ -43,6 +45,18 @@ const GoodsManage: React.FC = () => {
         console.log(e);
     };
 
+    const tagColors = (text: string) => {
+        switch (text) {
+            case "团购":
+                return "#2F54EB"
+            case "精选":
+                return "#EB2F96"
+            case "服务":
+                return "#13C2C2"
+            default:
+                return "#ff4d4f"
+        }
+    }
 
     const showModal = (action: 'add' | 'edit' | 'check' | 'addTomorrowGoods', record?: DataType) => {
         setCurrentAction(action);
@@ -84,10 +98,25 @@ const GoodsManage: React.FC = () => {
             align: "center"
         },
         {
-            title: "所属分类",
-            dataIndex: 'category',
+            title: "每单提成/元",
+            dataIndex: 'commission',
             width: 100,
             align: "center"
+        },
+        {
+            title: "菜单分类",
+            dataIndex: 'menuCategory',
+            width: 100,
+            align: "center"
+        },
+        {
+            title: "服务分类",
+            dataIndex: 'serveCategory',
+            width: 100,
+            align: "center",
+            render: (text: string) => (
+                <Tag bordered={false} color={tagColors(text)}>{text}</Tag>
+            )
         },
         {
             title: "商品描述",
@@ -126,7 +155,7 @@ const GoodsManage: React.FC = () => {
         {
             title: '操作',
             key: 'action',
-            width: 100,
+            width: 150,
             align: "center",
             render: (_, record) => (
                 <Space size="middle">
@@ -151,34 +180,40 @@ const GoodsManage: React.FC = () => {
             key: '1',
             name: 'iPhone16',
             price: 15000,
-            prePrice:18000,
+            prePrice: 18000,
             amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-            category: "团购",
+            menuCategory: "水果",
+            serveCategory: "团购",
             describe: "极品",
             remark: "备注",
+            commission: 19
         },
         {
             key: '2',
-            name: 'mate 60 Pro',
+            name: '家政',
             price: 6199,
-            prePrice:18000,
+            prePrice: 18000,
             amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-            category: "精选",
+            menuCategory: "生鲜",
+            serveCategory: "服务",
             describe: "极品",
             remark: "备注",
+            commission: 19
         },
         {
             key: '3',
             name: 'iPad Pro',
             price: 8999,
-            prePrice:18000,
+            prePrice: 18000,
             amount: 20,
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-            category: "服务",
+            menuCategory: "肉类",
+            serveCategory: "今日优选",
             describe: "极品",
             remark: "备注",
+            commission: 29
         },
     ];
 
@@ -189,9 +224,9 @@ const GoodsManage: React.FC = () => {
                 <Button type="primary" onClick={() => showModal('add')}>
                     新增商品
                 </Button>
-                <Button type="primary" onClick={() => showModal('addTomorrowGoods')}>
-                    新增明日优选商品
-                </Button>
+                {/*<Button type="primary" onClick={() => showModal('addTomorrowGoods')}>*/}
+                {/*    新增明日优选商品*/}
+                {/*</Button>*/}
             </div>
             <ConfigProvider
                 theme={{
