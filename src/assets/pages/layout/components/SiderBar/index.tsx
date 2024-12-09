@@ -6,11 +6,11 @@ import {
     DashboardOutlined,
     PieChartOutlined,
     CarryOutOutlined,
-    AliwangwangOutlined,
     TeamOutlined,
     DropboxOutlined,
     MoneyCollectOutlined,
-    EuroOutlined
+    // EuroOutlined,
+    ControlOutlined
 } from "@ant-design/icons";
 import {To, useNavigate} from "react-router-dom";
 
@@ -40,14 +40,14 @@ const SiderBar: React.FC = () => {
     };
     const items: MenuItem[] = [
         getItem('首页', '/home', <PieChartOutlined/>),
-        getItem('最新订单', '/order', <EuroOutlined/>),
+        // getItem('最新订单', '/order', <EuroOutlined/>),
         getItem('商品', '/goods', <MoneyCollectOutlined/>, [
-            getItem("商品管理", '/goods/manage'),
+            getItem("商品提成设置", '/goods/manage'),
             // getItem('上架商品', '/goods/add'),
         ]),
         getItem('团购', '/groupbuy', <AccountBookOutlined/>, [
             getItem('团购订单', '/groupbuy/list'),
-            getItem('团购分类管理', '/groupbuy/manage'),
+            // getItem('团购分类管理', '/groupbuy/manage'),
             getItem("今日优选订单", '/groupbuy/preferred')
         ]),
         getItem('精选', '/product', <CarryOutOutlined/>, [
@@ -58,9 +58,12 @@ const SiderBar: React.FC = () => {
             getItem('服务列表', '/serve/list'),
             getItem("服务管理", '/serve/manage'),
         ]),
-        getItem('站点管理', '/site', <AliwangwangOutlined/>, [
-            getItem('站点列表', '/site/list'),
-            // getItem("当前站点收益", '55'),
+        // getItem('站点管理', '/site', <AliwangwangOutlined/>, [
+        //     getItem('站点列表', '/site/list'),
+        //     // getItem("当前站点收益", '55'),
+        // ]),
+        getItem('审核', '/review', <ControlOutlined/>, [
+            getItem('入驻审核', '/review/user'),
         ]),
         getItem('售后', '/after-sale', <DropboxOutlined/>, [
             getItem('团购售后', '/after-sale/goods'),
@@ -70,7 +73,7 @@ const SiderBar: React.FC = () => {
         ]),
         getItem('用户设置', '/user', <TeamOutlined/>, [
             getItem('小程序用户列表', '/user/mini-list'),
-            getItem("后台用户列表", '/user/admin-list'),
+            getItem("入驻用户列表", '/user/admin-list'),
         ]),
     ];
 

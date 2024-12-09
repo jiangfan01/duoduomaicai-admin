@@ -5,6 +5,7 @@ const category = [
     {value: '1', label: '团购'},
     {value: '2', label: '精选'},
     {value: '3', label: '服务'},
+    {value: '4', label: '今日优选'},
 ];
 
 const GoodsSearch: React.FC = () => {

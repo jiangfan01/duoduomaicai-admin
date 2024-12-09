@@ -3,9 +3,9 @@ import {
     ConfigProvider,
     Image,
     message,
-    Modal,
+    Modal, Popconfirm, PopconfirmProps, Space,
     Table,
-    TableColumnsType,
+    TableColumnsType, Tag,
     Tooltip,
 } from "antd";
 import "../../../style/table.scss";
@@ -19,6 +19,7 @@ interface DataType {
     address: string;
     siteAddress: string;
     phone: number;
+    status: boolean;
 }
 
 const UserAdminList: React.FC = () => {
@@ -40,9 +41,18 @@ const UserAdminList: React.FC = () => {
     };
 
 
+    const cancel: PopconfirmProps['onCancel'] = (e) => {
+        console.log(e);
+    };
+
+    const confirm: PopconfirmProps['onConfirm'] = (e) => {
+        console.log(e);
+    };
+
+
     const columns: TableColumnsType<DataType> = [
         {
-            title: '用户名',
+            title: '入驻名',
             dataIndex: 'name',
             width: 100,
             align: "center"
@@ -58,12 +68,12 @@ const UserAdminList: React.FC = () => {
                 </Tooltip>
             )
         },
-        {
-            title: "所属站点",
-            dataIndex: 'siteAddress',
-            width: 100,
-            align: "center"
-        },
+        // {
+        //     title: "所属站点",
+        //     dataIndex: 'siteAddress',
+        //     width: 100,
+        //     align: "center"
+        // },
         {
             title: "地址",
             dataIndex: 'address',
@@ -71,7 +81,16 @@ const UserAdminList: React.FC = () => {
             align: "center",
         },
         {
-            title: '头像',
+            title: "状态",
+            dataIndex: 'status',
+            width: 100,
+            align: "center",
+            render: (text: boolean) => (
+                <Tag color={text ? "green" : "red"}>{text ? "入驻" : "已取消资格"}</Tag>
+            )
+        },
+        {
+            title: '图片',
             dataIndex: 'image',
             width: 200,
             render: (text: string) => (
@@ -83,26 +102,34 @@ const UserAdminList: React.FC = () => {
             ),
             align: "center"
         },
-        // {
-        //     title: '操作',
-        //     key: 'action',
-        //     width: 100,
-        //     align: "center",
-        //     render: (_, record) => (
-        //         <Space size="middle">
-        //             <a onClick={() => showModal('edit', record)}>修改</a>
-        //             <Popconfirm
-        //                 title="确认删除？"
-        //                 onConfirm={confirm}
-        //                 onCancel={cancel}
-        //                 okText="确认"
-        //                 cancelText="取消"
-        //             >
-        //                 <a>删除</a>
-        //             </Popconfirm>
-        //         </Space>
-        //     ),
-        // },
+        {
+            title: '操作',
+            key: 'action',
+            width: 100,
+            align: "center",
+            render: (_,) => (
+                <Space size="middle">
+                    <Popconfirm
+                        title="确认取消该商家入驻资格？"
+                        onConfirm={confirm}
+                        onCancel={cancel}
+                        okText="确认"
+                        cancelText="取消"
+                    >
+                        <a>取消入驻资格</a>
+                    </Popconfirm>
+                    <Popconfirm
+                        title="确认恢复？"
+                        onConfirm={confirm}
+                        onCancel={cancel}
+                        okText="确认"
+                        cancelText="取消"
+                    >
+                        <a>恢复入驻资格</a>
+                    </Popconfirm>
+                </Space>
+            ),
+        },
     ];
 
     const data: DataType[] = [
@@ -113,6 +140,7 @@ const UserAdminList: React.FC = () => {
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             phone: 123576678,
             address: "测试",
+            status: true,
         },
         {
             key: '2',
@@ -121,6 +149,7 @@ const UserAdminList: React.FC = () => {
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             phone: 123576678,
             address: "测试",
+            status: true,
         },
         {
             key: '3',
@@ -129,6 +158,7 @@ const UserAdminList: React.FC = () => {
             image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             phone: 123576678,
             address: "测试",
+            status: false,
         },
     ];
 

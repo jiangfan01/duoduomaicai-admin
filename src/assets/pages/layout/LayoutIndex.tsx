@@ -13,17 +13,18 @@ const LayoutIndex: React.FC = () => {
     } = theme.useToken();
 
 
-    const customTheme = {
-        token: {
-            colorPrimary: '#1890ff',
-            colorBgContainer: '#f0f2f5',
-            colorText: '#333',
-        },
-    };
+    // const customTheme = {
+    //     token: {
+    //         colorPrimary: '#1890ff',
+    //         colorBgContainer: '#f0f2f5',
+    //         colorText: '#333',
+    //     },
+    // };
+    // theme={customTheme}
 
     return (
         <App>
-            <ConfigProvider theme={customTheme}>
+            <ConfigProvider >
                 <Layout style={{minHeight: '100vh'}}>
                     {/*左侧导航*/}
                     <SiderBar/>

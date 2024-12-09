@@ -26,20 +26,17 @@ const beforeUpload = (file: FileType) => {
 };
 
 interface UploadImgProps {
-    action: 'add' | 'edit' | 'check' | 'addTomorrowGoods';
+    action: 'profit' | 'commission'
     initialImageUrl?: string;
+    isDisabled?: boolean;
 }
 
 
-const UploadImg: React.FC<UploadImgProps> = ({action, initialImageUrl}) => {
+const UploadImg: React.FC<UploadImgProps> = ({action, initialImageUrl, isDisabled}) => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
     useEffect(() => {
-        if (initialImageUrl && action !== 'add') {
-            setImageUrl(initialImageUrl);
-        } else {
-            setImageUrl("");
-        }
+        setImageUrl(initialImageUrl);
     }, [initialImageUrl, action]);
 
     const handleChange: UploadProps['onChange'] = (info) => {
@@ -72,7 +69,7 @@ const UploadImg: React.FC<UploadImgProps> = ({action, initialImageUrl}) => {
                 action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
                 beforeUpload={beforeUpload}
                 onChange={handleChange}
-                disabled={action === 'check'}
+                disabled={isDisabled}
             >
                 {imageUrl ?
                     <img src={imageUrl} alt="avatar"

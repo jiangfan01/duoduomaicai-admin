@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Cascader, CascaderProps, DatePicker, Form, Input, InputNumber, Select, Switch} from 'antd';
+import React, {useEffect} from 'react';
+import {Button, Cascader, Form, Input, InputNumber, Select} from 'antd';
 import UploadImg from "../../../../components/upload.tsx";
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -26,17 +26,18 @@ interface DataType {
     describe: string;
     amount: number;
     commission: number;
+    profit: number;
 }
 
 interface EditFormProps {
-    action: 'add' | 'edit' | 'check' | 'addTomorrowGoods';
+    action: 'profit' | 'commission'
     record: DataType | null;
     onSubmit: () => void;
 }
 
 const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
-    const [form] = Form.useForm();
-    const [isCommissionDisabled, setIsCommissionDisabled] = useState(false);
+    const [form]: any = Form.useForm();
+    console.log(action, "action")
 
     useEffect(() => {
         if (record) {
@@ -49,25 +50,13 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
                 serveCategory: record.serveCategory,
                 describe: record.describe,
                 amount: record.amount,
-                commission: record.commission || 0, // 设置默认值
+                commission: record.commission || 0,
+                profit: record.profit || 0
             });
-            // 检查是否需要禁用提成输入框
-            setIsCommissionDisabled(record.menuCategory === '服务');
         } else {
             form.resetFields();
         }
     }, [record, form]);
-
-    const isCheckMode = action === 'check';
-
-    const onChange: CascaderProps<Option>['onChange'] = (value) => {
-        // 如果分类是服务，禁用提成输入框，否则启用
-        if (value.includes('serve')) {
-            setIsCommissionDisabled(true);
-        } else {
-            setIsCommissionDisabled(false);
-        }
-    };
 
     const options: Option[] = [
         {
@@ -105,6 +94,10 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             value: 'serve',
             label: '服务',
         },
+        {
+            value:'today',
+            label: '今日优选',
+        },
     ];
 
 
@@ -117,56 +110,66 @@ const GoodsAction: React.FC<EditFormProps> = ({action, record, onSubmit}) => {
             style={{maxWidth: 600}}
         >
             <Form.Item label="商品名" name="name">
-                <Input placeholder="请输入商品名" disabled={isCheckMode}/>
+                <Input placeholder="请输入商品名" disabled/>
             </Form.Item>
             <Form.Item label="价格" name="price">
-                <InputNumber placeholder="请输入价格" disabled={isCheckMode} style={{width: 275}}/>
+                <InputNumber placeholder="请输入价格" disabled style={{width: 275}}/>
             </Form.Item>
             <Form.Item label="优惠前价格" name="prePrice">
-                <InputNumber placeholder="请输入优惠之前价格" disabled={isCheckMode} style={{width: 275}}/>
+                <InputNumber placeholder="请输入优惠之前价格" disabled style={{width: 275}}/>
             </Form.Item>
             <Form.Item label="数量" name="amount">
-                <InputNumber placeholder="请输入商品数量" disabled={isCheckMode} style={{width: 275}}/>
+                <InputNumber placeholder="请输入商品数量" disabled style={{width: 275}}/>
             </Form.Item>
-            <Form.Item label={action === 'edit' ? '修改图片' : '上传'}>
-                <UploadImg action={action} initialImageUrl={record?.image}/>
+            <Form.Item label='图片'>
+                <UploadImg action={action} initialImageUrl={record?.image} isDisabled={true}/>
             </Form.Item>
             <Form.Item label="菜单分类" name="menuCategory">
-                <Cascader options={options} onChange={onChange} disabled={isCheckMode}
-                          placeholder="请选择"/>
+                <Cascader options={options} disabled/>
             </Form.Item>
             <Form.Item label="服务分类" name="serveCategory">
-                <Select mode="multiple" options={serveOptions} disabled={isCheckMode}
-                        placeholder="请选择"/>
+                <Select mode="multiple"
+                        placeholder="请选择"
+                        disabled
+                        options={serveOptions || []}
+                />
             </Form.Item>
-            <Form.Item label="今日优选">
-                <Switch checkedChildren="今日优选" unCheckedChildren="关闭" defaultChecked disabled={isCheckMode}/>
-            </Form.Item>
+            {/*<Form.Item label="今日优选">*/}
+            {/*    <Switch checkedChildren="今日优选" unCheckedChildren="关闭"*/}
+            {/*            onChange={checkedYouXuan}*/}
+            {/*            disabled={isCheckMode}/>*/}
+            {/*</Form.Item>*/}
             <Form.Item label="商品描述" name="describe">
-                <Input placeholder="请输入描述" disabled={isCheckMode}/>
+                <Input placeholder="请输入描述" disabled/>
+            </Form.Item>
+            <Form.Item label="每单利润" name="profit">
+                <InputNumber
+                    placeholder="请输入"
+                    value={form.getFieldValue('profit') || 0}
+                />
             </Form.Item>
             <Form.Item label="每单提成" name="commission">
                 <InputNumber
                     placeholder="请输入"
-                    disabled={isCheckMode || isCommissionDisabled}
                     value={form.getFieldValue('commission') || 0}
                 />
             </Form.Item>
-            {action === 'addTomorrowGoods' && (
-                <Form.Item label="时间范围" name="dateRange">
-                    <DatePicker.RangePicker
-                        showTime={{format: 'HH:mm'}}
-                        format="YYYY-MM-DD HH:mm"
-                        placeholder={['开始时间', '结束时间']}
-                        style={{width: 275}}
-                        allowClear
-                    />
-                </Form.Item>
-            )}
+            {/*{isYouXuanDisabled && (*/}
+            {/*    <Form.Item label="时间范围" name="dateRange">*/}
+            {/*        <DatePicker.RangePicker*/}
+            {/*            showTime={{format: 'HH:mm'}}*/}
+            {/*            format="YYYY-MM-DD HH:mm"*/}
+            {/*            placeholder={['开始时间', '结束时间']}*/}
+            {/*            style={{width: 275}}*/}
+            {/*            allowClear*/}
+            {/*        />*/}
+            {/*    </Form.Item>*/}
+            {/*)}*/}
+
 
             <Form.Item label="操作">
                 <Button type="primary" onClick={onSubmit}>
-                    {action === 'check' ? '关闭' : '提交'}
+                    提交
                 </Button>
             </Form.Item>
         </Form>

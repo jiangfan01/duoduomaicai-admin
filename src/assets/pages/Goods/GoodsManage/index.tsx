@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {
-    Button,
+    // Button,
     ConfigProvider,
     Image, Modal,
-    Popconfirm,
-    PopconfirmProps,
-    Space, Switch,
+    // Popconfirm,
+    // PopconfirmProps,
+    Space,
+    // Switch,
     Table,
     TableColumnsType, Tag,
 } from "antd";
@@ -27,23 +28,24 @@ interface DataType {
     amount: number;
     commission: number;
     remark: string;
+    profit: number;
 }
 
 const GoodsManage: React.FC = () => {
 
     const [open, setOpen] = useState(false);
     const [confirmLoading] = useState(false);
-    const [currentAction, setCurrentAction] = useState<'add' | 'edit' | 'check' | 'addTomorrowGoods'>('add');
+    const [currentAction, setCurrentAction] = useState<'profit' | 'commission'>('profit');
     const [currentRecord, setCurrentRecord] = useState<DataType | null>(null);
 
 
-    const confirm: PopconfirmProps['onConfirm'] = (e) => {
-        console.log(e);
-    };
-
-    const cancel: PopconfirmProps['onCancel'] = (e) => {
-        console.log(e);
-    };
+    // const confirm: PopconfirmProps['onConfirm'] = (e) => {
+    //     console.log(e);
+    // };
+    //
+    // const cancel: PopconfirmProps['onCancel'] = (e) => {
+    //     console.log(e);
+    // };
 
     const tagColors = (text: string) => {
         switch (text) {
@@ -58,7 +60,7 @@ const GoodsManage: React.FC = () => {
         }
     }
 
-    const showModal = (action: 'add' | 'edit' | 'check' | 'addTomorrowGoods', record?: DataType) => {
+    const showModal = (action: 'profit' | 'commission', record?: DataType) => {
         setCurrentAction(action);
         setCurrentRecord(record || null);
         setOpen(true);
@@ -94,6 +96,12 @@ const GoodsManage: React.FC = () => {
         {
             title: "库存",
             dataIndex: 'amount',
+            width: 100,
+            align: "center"
+        },
+        {
+            title: "每单利润/元",
+            dataIndex: 'profit',
             width: 100,
             align: "center"
         },
@@ -143,15 +151,15 @@ const GoodsManage: React.FC = () => {
             ),
             align: "center"
         },
-        {
-            title: "上架/下架",
-            width: 100,
-            render: () => (
-                <Space direction="vertical">
-                    <Switch checkedChildren="上架" unCheckedChildren="下架" defaultChecked/>
-                </Space>
-            )
-        },
+        // {
+        //     title: "上架/下架",
+        //     width: 100,
+        //     render: () => (
+        //         <Space direction="vertical">
+        //             <Switch checkedChildren="上架" unCheckedChildren="下架" defaultChecked/>
+        //         </Space>
+        //     )
+        // },
         {
             title: '操作',
             key: 'action',
@@ -159,17 +167,17 @@ const GoodsManage: React.FC = () => {
             align: "center",
             render: (_, record) => (
                 <Space size="middle">
-                    <a onClick={() => showModal('edit', record)}>修改</a>
-                    <a onClick={() => showModal('check', record)}>查看</a>
-                    <Popconfirm
-                        title="确认删除？"
-                        onConfirm={confirm}
-                        onCancel={cancel}
-                        okText="确认"
-                        cancelText="取消"
-                    >
-                        <a>删除</a>
-                    </Popconfirm>
+                    <a onClick={() => showModal('profit', record)}>设置提成/利润</a>
+                    {/*<a onClick={() => showModal('commission', record)}>设置站点提成</a>*/}
+                    {/*<Popconfirm*/}
+                    {/*    title="确认删除？"*/}
+                    {/*    onConfirm={confirm}*/}
+                    {/*    onCancel={cancel}*/}
+                    {/*    okText="确认"*/}
+                    {/*    cancelText="取消"*/}
+                    {/*>*/}
+                    {/*    <a>删除</a>*/}
+                    {/*</Popconfirm>*/}
                 </Space>
             ),
         },
@@ -187,7 +195,8 @@ const GoodsManage: React.FC = () => {
             serveCategory: "团购",
             describe: "极品",
             remark: "备注",
-            commission: 19
+            commission: 19,
+            profit: 100
         },
         {
             key: '2',
@@ -200,7 +209,8 @@ const GoodsManage: React.FC = () => {
             serveCategory: "服务",
             describe: "极品",
             remark: "备注",
-            commission: 19
+            commission: 19,
+            profit: 100
         },
         {
             key: '3',
@@ -213,7 +223,8 @@ const GoodsManage: React.FC = () => {
             serveCategory: "今日优选",
             describe: "极品",
             remark: "备注",
-            commission: 29
+            commission: 29,
+            profit: 100
         },
     ];
 
@@ -221,9 +232,9 @@ const GoodsManage: React.FC = () => {
         <>
             <div className="top-search">
                 <GoodsSearch></GoodsSearch>
-                <Button type="primary" onClick={() => showModal('add')}>
-                    新增商品
-                </Button>
+                {/*<Button type="primary" onClick={() => showModal('add')}>*/}
+                {/*    新增商品*/}
+                {/*</Button>*/}
                 {/*<Button type="primary" onClick={() => showModal('addTomorrowGoods')}>*/}
                 {/*    新增明日优选商品*/}
                 {/*</Button>*/}
@@ -244,11 +255,7 @@ const GoodsManage: React.FC = () => {
                     scroll={{x: 'max-content'}}
                 />
                 <Modal
-                    title={
-                        currentAction === 'add' ? '添加商品' :
-                            currentAction === 'edit' ? '修改商品' :
-                                currentAction === 'addTomorrowGoods' ? '新增明日优选商品' : '查看商品'
-                    }
+                    title="设置"
                     open={open}
                     confirmLoading={confirmLoading}
                     onCancel={handleCancel}

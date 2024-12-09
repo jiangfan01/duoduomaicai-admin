@@ -18,6 +18,7 @@ import UserAdminList from "../pages/User/UserAdminList";
 import MiniProgramList from "../pages/User/ MiniProgramList";
 import LoginPage from "../pages/Login/Login";
 import OrderPage from "../pages/Order";
+import UserReview from "../pages/Review/UserReview";
 
 
 const routes = createBrowserRouter([
@@ -131,6 +132,15 @@ const routes = createBrowserRouter([
                         {
                             path: '/user/mini-list',
                             element: <MiniProgramList/>
+                        }
+                    ]
+                },
+                {
+                    path: '/review',
+                    children: [
+                        {
+                            path: '/review/user',
+                            element: <UserReview/>
                         }
                     ]
                 }

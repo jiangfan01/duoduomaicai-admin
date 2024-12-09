@@ -16,43 +16,43 @@ const UserCount: React.FC = () => (
             gap: "40px",
             marginBottom: "40px"
         }}>
-            <Col>
-                <Card bordered={false}>
-                    <Statistic
-                        title="站点数"
-                        value={30}
-                        precision={0}
-                        valueStyle={{color: '#3f8600'}}
-                        suffix="个"
-                        formatter={formatter}
-                    />
-                </Card>
-            </Col>
-            <Col>
-                <Card bordered={false}>
-                    <Statistic
-                        title="今日收益"
-                        value={30}
-                        precision={0}
-                        valueStyle={{color: '#3f8600'}}
-                        suffix="RMB"
-                        formatter={formatter}
-                    />
-                </Card>
-            </Col>
+            {/*<Col>*/}
+            {/*    <Card bordered={false}>*/}
+            {/*        <Statistic*/}
+            {/*            title="站点数"*/}
+            {/*            value={30}*/}
+            {/*            precision={0}*/}
+            {/*            valueStyle={{color: '#3f8600'}}*/}
+            {/*            suffix="个"*/}
+            {/*            formatter={formatter}*/}
+            {/*        />*/}
+            {/*    </Card>*/}
+            {/*</Col>*/}
+            {/*<Col>*/}
+            {/*    <Card bordered={false}>*/}
+            {/*        <Statistic*/}
+            {/*            title="今日收益"*/}
+            {/*            value={30}*/}
+            {/*            precision={0}*/}
+            {/*            valueStyle={{color: '#3f8600'}}*/}
+            {/*            suffix="RMB"*/}
+            {/*            formatter={formatter}*/}
+            {/*        />*/}
+            {/*    </Card>*/}
+            {/*</Col>*/}
 
-            <Col>
-                <Card bordered={false}>
-                    <Statistic
-                        title="总收益"
-                        value={10000}
-                        precision={0}
-                        valueStyle={{color: '#3f8600'}}
-                        suffix="RMB"
-                        formatter={formatter}
-                    />
-                </Card>
-            </Col>
+            {/*<Col>*/}
+            {/*    <Card bordered={false}>*/}
+            {/*        <Statistic*/}
+            {/*            title="总收益"*/}
+            {/*            value={10000}*/}
+            {/*            precision={0}*/}
+            {/*            valueStyle={{color: '#3f8600'}}*/}
+            {/*            suffix="RMB"*/}
+            {/*            formatter={formatter}*/}
+            {/*        />*/}
+            {/*    </Card>*/}
+            {/*</Col>*/}
         </Row>
     )
 ;
