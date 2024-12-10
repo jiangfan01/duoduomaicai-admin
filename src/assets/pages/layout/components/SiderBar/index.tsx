@@ -42,8 +42,8 @@ const SiderBar: React.FC = () => {
         getItem('首页', '/home', <PieChartOutlined/>),
         // getItem('最新订单', '/order', <EuroOutlined/>),
         getItem('商品', '/goods', <MoneyCollectOutlined/>, [
-            getItem("商品提成设置", '/goods/manage'),
-            // getItem('上架商品', '/goods/add'),
+            getItem("商品设置", '/goods/manage'),
+            getItem('商品分类设置', '/goods/category'),
         ]),
         getItem('团购', '/groupbuy', <AccountBookOutlined/>, [
             getItem('团购订单', '/groupbuy/list'),
@@ -56,7 +56,7 @@ const SiderBar: React.FC = () => {
         ]),
         getItem('服务', '/serve', <DashboardOutlined/>, [
             getItem('服务列表', '/serve/list'),
-            getItem("服务管理", '/serve/manage'),
+            // getItem("服务管理", '/serve/manage'),
         ]),
         // getItem('站点管理', '/site', <AliwangwangOutlined/>, [
         //     getItem('站点列表', '/site/list'),

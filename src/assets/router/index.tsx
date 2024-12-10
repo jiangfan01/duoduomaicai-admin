@@ -19,6 +19,8 @@ import MiniProgramList from "../pages/User/ MiniProgramList";
 import LoginPage from "../pages/Login/Login";
 import OrderPage from "../pages/Order";
 import UserReview from "../pages/Review/UserReview";
+import GoodsCategory from "../pages/Goods/GoodsCategory";
+import GoodsCategoryChildren from "../pages/Goods/GoodsCategory/GoodsCategoryChildren";
 
 
 const routes = createBrowserRouter([
@@ -46,6 +48,14 @@ const routes = createBrowserRouter([
                         {
                             path: '/goods/manage',
                             element: <GoodsManage/>
+                        },
+                        {
+                            path: '/goods/category',
+                            element: <GoodsCategory/>
+                        },
+                        {
+                            path: '/goods/category/children',
+                            element: <GoodsCategoryChildren/>
                         }
                     ]
                 },
